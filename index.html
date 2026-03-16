@@ -1,229 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profit Plug - Trading Course Store</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-  body {
-    font-family: Inter, system-ui, sans-serif;
-    background: #0b3d91;
-    color: #f3f4f6;
-    scroll-behavior: smooth;
-  }
-  .glass {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255,255,255,0.12);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    transition: transform 0.2s, background 0.2s;
-  }
-  .glass:hover {
-    transform: translateY(-5px);
-    background: rgba(255,255,255,0.12);
-  }
-  button { cursor: pointer; }
-  a { text-decoration: none; }
-  .hidden { display: none; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profit Plug</title>
+  <meta name="description" content="Learn the fundamentals of legal reselling, sourcing, and online flipping with Profit Plug." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background: linear-gradient(180deg, #0b3d91 0%, #10213a 38%, #1f2937 100%);
+      color: #f3f4f6;
+      overflow-x: hidden;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .glass {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(0,0,0,0.45);
+      border-radius: 999px;
+      animation: twinkle 5s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.15; transform: scale(1); }
+      50% { opacity: 0.55; transform: scale(1.8); }
+    }
+    .floaty { animation: floaty 6s ease-in-out infinite; }
+    @keyframes floaty {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: all 0.8s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .money-bar {
+      animation: grow 2.4s ease forwards;
+      transform-origin: bottom;
+      transform: scaleY(0.25);
+    }
+    @keyframes grow {
+      to { transform: scaleY(1); }
+    }
+    .hero-glow {
+      background: radial-gradient(circle at top, rgba(96,165,250,0.25), transparent 45%);
+    }
+    button { cursor: pointer; }
+  </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body>
+  <!-- Stars Background -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden">
+    <div class="star" style="top:8%; left:10%; animation-delay:0.2s"></div>
+    <div class="star" style="top:18%; left:30%; animation-delay:1.6s"></div>
+    <div class="star" style="top:12%; left:72%; animation-delay:0.9s"></div>
+    <div class="star" style="top:28%; left:84%; animation-delay:2.1s"></div>
+    <div class="star" style="top:37%; left:14%; animation-delay:1.2s"></div>
+    <div class="star" style="top:49%; left:65%; animation-delay:0.6s"></div>
+    <div class="star" style="top:58%; left:22%; animation-delay:2.8s"></div>
+    <div class="star" style="top:66%; left:88%; animation-delay:1.8s"></div>
+    <div class="star" style="top:80%; left:16%; animation-delay:0.4s"></div>
+    <div class="star" style="top:85%; left:56%; animation-delay:1.1s"></div>
+  </div>
 
-<!-- Navbar -->
-<header class="sticky top-0 z-50 bg-slate-950/70 backdrop-blur border-b border-white/10">
-  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="#" class="text-2xl font-black tracking-wide">Profit <span class="text-sky-300">Plug</span></a>
-    <div class="flex gap-6 text-sm text-slate-200">
-      <button onclick="showSection('products')">Products</button>
-      <button onclick="showSection('cart')">Cart (<span id="cart-count">0</span>)</button>
-    </div>
-  </nav>
-</header>
-
-<main class="flex-grow max-w-7xl mx-auto px-6 py-20">
-
-  <!-- Products List -->
-  <section id="products-section">
-    <h1 class="text-4xl font-black mb-10 text-center">Available Products</h1>
-    <div id="products-container" class="grid md:grid-cols-3 gap-8"></div>
-  </section>
-
-  <!-- Product Detail -->
-  <section id="product-section" class="hidden">
-    <button onclick="showSection('products')" class="mb-6 text-sky-400 font-bold">← Back to Products</button>
-    <div class="glass rounded-3xl p-10">
-      <h1 class="text-4xl font-black mb-4" id="product-name"></h1>
-      <p class="text-slate-300 mb-2" id="product-short"></p>
-      <p class="font-black text-2xl mb-4" id="product-price"></p>
-      <p class="text-slate-300 mb-6 whitespace-pre-line" id="product-long"></p>
-
-      <label class="block mb-2">Quantity:</label>
-      <input type="number" id="quantity" value="1" min="1" class="text-black px-3 py-1 rounded-lg mb-4 w-24">
-
-      <button id="buy-now" class="bg-sky-400 text-slate-950 font-bold py-2 px-4 rounded-full hover:scale-105 transition">Add to Cart</button>
-    </div>
-  </section>
-
-  <!-- Cart Section -->
-  <section id="cart-section" class="hidden">
-    <h1 class="text-4xl font-black mb-10 text-center">Your Cart</h1>
-    <div id="cart-container" class="space-y-6"></div>
-
-    <div class="mt-10 text-right">
-      <p class="text-xl font-bold mb-4">Total: $<span id="cart-total">0</span></p>
-      <button id="checkout" class="bg-sky-400 text-slate-950 font-bold py-2 px-4 rounded-full hover:scale-105 transition">Checkout via Cash App</button>
-    </div>
-  </section>
-
-</main>
-
-<footer class="border-t border-white/10 py-8 px-6 text-center text-slate-400 text-sm">
-  <p>© 2026 Profit Plug. Educational content for legal resale practices only.</p>
-</footer>
-
-<script>
-const products = {
-  'trading-course': {
-    name: "Trading Course",
-    price: 25,
-    short: "No experience needed — step-by-step roadmap to start trading confidently.",
-    long: `Stop gambling and start trading. Most beginners lose money because they treat the market like a casino. This comprehensive, step-by-step course is designed to take you from knowing nothing about charts to executing your first profitable trades with confidence. We focus on a "risk-first" methodology, teaching you how to protect your capital before chasing profits.
-What You’ll Learn:
-- Market Mechanics: Decoding candlesticks, support/resistance, and market structure without confusing indicators.
-- Risk Management: The non-negotiable 1% rule to keep you in the game.
-- Price Action Strategy: Identifying high-probability setups in Stocks and Forex.
-- Psychological Conditioning: Mastering fear and greed to avoid emotional, "revenge" trades.
-- Live Simulation: Practicing in a risk-free environment to build muscle memory.
-Best for: Students, busy professionals, and beginners looking for a disciplined, long-term skillset.`,
-    cashLink: "https://cash.app/$kinanlbnx"
-  }
-};
-
-// Initialize Products List
-const productsContainer = document.getElementById('products-container');
-for (const key in products) {
-  const prod = products[key];
-  const card = document.createElement('div');
-  card.className = 'glass rounded-3xl p-6';
-  card.innerHTML = `
-    <h2 class="text-2xl font-bold mb-2">${prod.name}</h2>
-    <p class="text-slate-300 mb-2">${prod.short}</p>
-    <p class="font-black text-xl mb-4">$${prod.price}</p>
-    <button class="bg-sky-400 text-slate-950 font-bold py-2 px-4 rounded-full hover:scale-105 transition" onclick="viewProduct('${key}')">View Product</button>
-  `;
-  productsContainer.appendChild(card);
-}
-
-// Section switching
-function showSection(section) {
-  document.getElementById('products-section').classList.add('hidden');
-  document.getElementById('product-section').classList.add('hidden');
-  document.getElementById('cart-section').classList.add('hidden');
-
-  if(section === 'products') document.getElementById('products-section').classList.remove('hidden');
-  if(section === 'product') document.getElementById('product-section').classList.remove('hidden');
-  if(section === 'cart') {
-    document.getElementById('cart-section').classList.remove('hidden');
-    renderCart();
-  }
-}
-
-// View product
-function viewProduct(key) {
-  const prod = products[key];
-  document.getElementById('product-name').innerText = prod.name;
-  document.getElementById('product-short').innerText = prod.short;
-  document.getElementById('product-price').innerText = `$${prod.price}`;
-  document.getElementById('product-long').innerText = prod.long;
-  document.getElementById('quantity').value = 1;
-
-  document.getElementById('buy-now').onclick = () => {
-    const qty = parseInt(document.getElementById('quantity').value);
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const existing = cart.find(i => i.key === key);
-    if(existing) existing.quantity += qty;
-    else cart.push({key, quantity: qty});
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    alert('Added to cart!');
-    showSection('cart');
-  };
-
-  showSection('product');
-}
-
-// Cart Functions
-function renderCart() {
-  const container = document.getElementById('cart-container');
-  container.innerHTML = '';
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  let total = 0;
-
-  cart.forEach(item => {
-    const prod = products[item.key];
-    const itemTotal = prod.price * item.quantity;
-    total += itemTotal;
-
-    const div = document.createElement('div');
-    div.className = 'glass rounded-3xl p-6 flex justify-between items-center';
-    div.innerHTML = `
-      <div>
-        <h2 class="text-xl font-bold">${prod.name}</h2>
-        <p>$${prod.price} each</p>
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-slate-950/70 backdrop-blur border-b border-white/10">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#home" class="text-2xl font-black tracking-wide">Profit <span class="text-sky-300">Plug</span></a>
+      <div class="hidden md:flex gap-6 text-sm text-slate-200">
+        <a href="#how" class="hover:text-white">How It Works</a>
+        <a href="#brands" class="hover:text-white">Brands</a>
+        <a href="#marketplace" class="hover:text-white">Marketplace</a>
+        <a href="#sell" class="hover:text-white">How To Sell</a>
+        <a href="#plan" class="hover:text-white">First Sale Plan</a>
+        <a href="#faq" class="hover:text-white">FAQ</a>
+        <a href="#products" class="hover:text-white">Products</a>
       </div>
-      <div class="flex items-center gap-2">
-        <input type="number" min="1" value="${item.quantity}" data-key="${item.key}" class="quantity-input text-black px-2 py-1 rounded-lg">
-        <span class="font-bold">$${itemTotal}</span>
-        <button data-key="${item.key}" class="remove-btn text-red-500 font-bold">Remove</button>
+      <button onclick="showProducts()" class="rounded-full bg-sky-400 text-slate-950 font-bold px-7 py-3.5 hover:scale-105 transition">Start Learning</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="relative hero-glow">
+      <div class="max-w-7xl mx-auto px-6 py-24 md:py-32 grid lg:grid-cols-2 gap-14 items-center">
+        <div class="reveal">
+          <p class="uppercase tracking-[0.3em] text-sky-200 text-xs mb-5">Luxury Reselling Education</p>
+          <h1 class="text-4xl md:text-6xl font-black leading-tight">Learn How To Make Money Reselling Designer Clothes & Accessories</h1>
+          <p class="mt-6 text-xl text-slate-200">We show you exactly how to buy low, sell smart, and turn it into real cash.</p>
+          <p class="mt-6 text-slate-300 max-w-2xl">Many people want to make money online but do not know where to start. Profit Plug teaches the basics of sourcing, pricing, listing, and reselling popular fashion, accessories, and everyday products in a simple beginner-friendly way.</p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <button onclick="showProducts()" class="rounded-full bg-sky-400 text-slate-950 font-bold px-7 py-3.5 hover:scale-105 transition">Start Learning</button>
+            <a href="#how" class="rounded-full border border-white/20 px-7 py-3.5 hover:bg-white/10 transition">See How It Works</a>
+          </div>
+          <div class="mt-10 grid grid-cols-3 gap-4 max-w-xl">
+            <div class="glass rounded-2xl p-4">
+              <div class="text-2xl font-black">Beginner</div>
+              <div class="text-sm text-slate-300 mt-1">Simple step-by-step guidance</div>
+            </div>
+            <div class="glass rounded-2xl p-4">
+              <div class="text-2xl font-black">Flexible</div>
+              <div class="text-sm text-slate-300 mt-1">Learn from anywhere</div>
+            </div>
+            <div class="glass rounded-2xl p-4">
+              <div class="text-2xl font-black">Focused</div>
+              <div class="text-sm text-slate-300 mt-1">Reselling fundamentals that matter</div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="glass rounded-[2rem] p-6 md:p-8 relative overflow-hidden">
+            <div class="absolute -top-10 -right-8 w-32 h-32 bg-sky-300/20 rounded-full blur-3xl"></div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="glass rounded-3xl p-5 floaty">
+                <div class="text-sm text-slate-300">Money Growth</div>
+                <div class="mt-5 h-32 flex items-end gap-2">
+                  <div class="money-bar w-8 rounded-t-xl bg-sky-300 h-12"></div>
+                  <div class="money-bar w-8 rounded-t-xl bg-sky-300 h-16" style="animation-delay:0.2s"></div>
+                  <div class="money-bar w-8 rounded-t-xl bg-sky-300 h-24" style="animation-delay:0.4s"></div>
+                  <div class="money-bar w-8 rounded-t-xl bg-sky-300 h-32" style="animation-delay:0.6s"></div>
+                </div>
+              </div>
+              <div class="glass rounded-3xl p-5">
+                <div class="text-sm text-slate-300">Popular Categories</div>
+                <div class="mt-4 flex flex-wrap gap-2 text-xs">
+                  <span class="px-3 py-1.5 rounded-full bg-white/10">Designer Wear</span>
+                  <span class="px-3 py-1.5 rounded-full bg-white/10">Sneakers</span>
+                  <span class="px-3 py-1.5 rounded-full bg-white/10">Audio Tech</span>
+                  <span class="px-3 py-1.5 rounded-full bg-white/10">Accessories</span>
+                </div>
+                <div class="mt-5 text-3xl">🎧 👕 👜 ⌚</div>
+              </div>
+              <div class="glass rounded-3xl p-5 col-span-2">
+                <div class="text-sm text-slate-300 mb-3">Trending Brands People Search For</div>
+                <div class="flex flex-wrap gap-2 text-sm font-semibold text-slate-100">
+                  <span class="px-3 py-2 rounded-full bg-white/10">Chrome Hearts</span>
+                  <span class="px-3 py-2 rounded-full bg-white/10">HELLSTAR</span>
+                  <span class="px-3 py-2 rounded-full bg-white/10">BAPE</span>
+                  <span class="px-3 py-2 rounded-full bg-white/10">BALENCIAGA</span>
+                  <span class="px-3 py-2 rounded-full bg-white/10">Maison Margiela</span>
+                  <span class="px-3 py-2 rounded-full bg-white/10">Gucci</span>
+                  <span class="px-3 py-2 rounded-full bg-white/10">Nike Tech</span>
+                  <span class="px-3 py-2 rounded-full bg-white/10">Moncler</span>
+                  <span class="px-3 py-2 rounded-full bg-white/10">AirPods</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    `;
-    container.appendChild(div);
-  });
+    </section>
 
-  document.getElementById('cart-total').innerText = total;
-}
+    <!-- How It Works -->
+    <section id="how" class="max-w-7xl mx-auto px-6 py-20">
+      <div class="reveal text-center max-w-3xl mx-auto">
+        <p class="uppercase tracking-[0.3em] text-sky-200 text-xs">How It Works</p>
+        <h2 class="text-3xl md:text-5xl font-black mt-4">A simple reselling model beginners can understand</h2>
+        <p class="mt-5 text-slate-300">Buy items cheap, list clearly, sell on trusted platforms, and keep the profit.</p>
+      </div>
+      <div class="glass rounded-[2rem] p-6 md:p-8 mt-10 reveal overflow-auto">
+        <h3 class="text-2xl font-black mb-5">Example Profit Breakdown</h3>
+        <table class="w-full text-left min-w-[640px] text-slate-200">
+          <thead>
+            <tr class="text-sky-200 border-b border-white/10">
+              <th class="py-3">Item</th>
+              <th class="py-3">Buy Price</th>
+              <th class="py-3">Sell Price</th>
+              <th class="py-3">Potential Margin*</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-white/10"><td class="py-3">Chrome Hearts Hoodie</td><td>$60</td><td>$320</td><td>$260</td></tr>
+            <tr class="border-b border-white/10"><td class="py-3">BAPE Tee</td><td>$40</td><td>$200</td><td>$160</td></tr>
+            <tr><td class="py-3">AirPods</td><td>$50</td><td>$180</td><td>$130</td></tr>
+          </tbody>
+        </table>
+        <p class="text-xs text-slate-400 mt-4">*Illustrative examples only. Real results vary based on authenticity, condition, fees, demand, returns, and local laws.</p>
+      </div>
+    </section>
 
-document.addEventListener('input', e => {
-  if(e.target.classList.contains('quantity-input')) {
-    const key = e.target.dataset.key;
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const item = cart.find(i => i.key === key);
-    if(item) item.quantity = parseInt(e.target.value);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart();
-    updateCartCount();
-  }
-});
+    <!-- Products Section -->
+    <section id="products" class="max-w-7xl mx-auto px-6 py-20 hidden">
+      <div class="reveal text-center max-w-3xl mx-auto">
+        <p class="uppercase tracking-[0.3em] text-sky-200 text-xs">Products</p>
+        <h2 class="text-3xl md:text-5xl font-black mt-4">Available Courses</h2>
+      </div>
+      <div class="mt-12 grid md:grid-cols-2 gap-6 reveal">
+        <div class="glass rounded-3xl p-6 cursor-pointer" onclick="showProductDetail('tradingCourse')">
+          <h3 class="text-2xl font-black">Trading Course</h3>
+          <p class="text-slate-300 mt-2">No experience needed—step-by-step roadmap to start trading confidently.</p>
+          <div class="mt-2 font-bold text-sky-300">$25</div>
+        </div>
+      </div>
+    </section>
 
-document.addEventListener('click', e => {
-  if(e.target.classList.contains('remove-btn')) {
-    const key = e.target.dataset.key;
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart = cart.filter(i => i.key !== key);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart();
-    updateCartCount();
-  }
-});
+    <!-- Product Detail Modal -->
+    <section id="productDetail" class="max-w-4xl mx-auto px-6 py-20 hidden">
+      <div class="glass rounded-[2rem] p-10 reveal">
+        <h2 class="text-3xl font-black" id="productTitle"></h2>
+        <p class="mt-4 text-slate-300" id="productShortDesc"></p>
+        <p class="mt-4 text-slate-200" id="productLongDesc"></p>
+        <div class="mt-6 flex gap-4 items-center">
+          <label class="text-slate-200 font-bold">Quantity:</label>
+          <input type="number" id="productQty" value="1" min="1" class="text-slate-900 px-2 py-1 rounded"/>
+          <button onclick="addToCart()" class="rounded-full bg-sky-400 text-slate-950 font-bold px-7 py-3.5 hover:scale-105 transition">Add to Cart</button>
+        </div>
+        <div class="mt-4">
+          <button onclick="backToProducts()" class="rounded-full border border-white/20 px-7 py-3.5 hover:bg-white/10 transition">Back to Products</button>
+        </div>
+      </div>
+    </section>
 
-// Checkout
-document.getElementById('checkout').onclick = () => {
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  if(cart.length === 0) { alert('Cart is empty!'); return; }
-  let total = 0;
-  cart.forEach(item => total += products[item.key].price * item.quantity);
-  const link = `https://cash.app/$kinanlbnx/$${total}`;
-  window.open(link, '_blank');
-};
+    <!-- Cart Section -->
+    <section id="cartSection" class="max-w-7xl mx-auto px-6 py-20 hidden">
+      <div class="reveal text-center max-w-3xl mx-auto">
+        <p class="uppercase tracking-[0.3em] text-sky-200 text-xs">Cart</p>
+        <h2 class="text-3xl md:text-5xl font-black mt-4">Your Cart</h2>
+      </div>
+      <div class="mt-12 reveal">
+        <table class="w-full text-left text-slate-200">
+          <thead>
+            <tr class="border-b border-white/10">
+              <th class="py-2">Product</th>
+              <th class="py-2">Price</th>
+              <th class="py-2">Quantity</th>
+              <th class="py-2">Total</th>
+              <th class="py-2">Remove</th>
+            </tr>
+          </thead>
+          <tbody id="cartTable" class="border-b border-white/10"></tbody>
+        </table>
+        <div class="mt-6 text-right text-xl font-bold text-slate-200">Grand Total: $<span id="grandTotal">0</span></div>
+        <div class="mt-4 flex flex-col md:flex-row gap-4 justify-end">
+          <!-- Cash App Checkout -->
+          <a href="https://cash.app/$kinanlbnx" class="rounded-full bg-green-500 text-slate-950 font-bold px-7 py-3.5 hover:scale-105 transition" target="_blank">Checkout with Cash App</a>
+          <!-- PayPal Checkout -->
+          <div id="paypal-container-94VSH69SPC7F8"></div>
+        </div>
+        <div class="mt-4 text-right">
+          <button onclick="backToProducts()" class="rounded-full border border-white/20 px-7 py-3.5 hover:bg-white/10 transition">Back to Products</button>
+        </div>
+      </div>
+    </section>
 
-// Update cart count in navbar
-function updateCartCount() {
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  document.getElementById('cart-count').innerText = cart.reduce((a,b)=>a+b.quantity,0);
-}
+  </main>
 
-updateCartCount();
-</script>
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-8 px-6 text-center text-slate-400 text-sm">
+    <p>© 2026 Profit Plug. Educational content for legal resale practices only.</p>
+  </footer>
+
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=BAACb_sxJ9uN2od0V4VDqHnmYPI3EJmCvbcdZE6toMfxuAIWh1qTsxT8F4BgChLjER8ywC1XkkA_ondxec&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
+  <script>
+    paypal.HostedButtons({
+      hostedButtonId: "94VSH69SPC7F8",
+    }).render("#paypal-container-94VSH69SPC7F8");
+  </script>
+
+  <!-- Site Script -->
+  <script>
+    const products = {
+      tradingCourse: {
+        title: "Trading Course",
+        shortDesc: "No experience needed—step-by-step roadmap to start trading confidently.",
+        longDesc: `Stop gambling and start trading. Most beginners lose money because they treat the market like a casino. This comprehensive, step-by-step course is designed to take you from knowing nothing about charts to executing your first profitable trades with confidence. We focus on a "risk-first" methodology, teaching you how to protect your capital before chasing profits.
+        What You’ll Learn:
+        Market Mechanics: Decoding candlesticks, support/resistance, and market structure without confusing indicators.
+        Risk Management: The non-negotiable 1% rule to keep you in the game.
+        Price Action Strategy: Identifying high-probability setups in Stocks and Forex.
+        Psychological Conditioning: Mastering fear and greed to avoid emotional, "revenge" trades.
+        Live Simulation: Practicing in a risk-free environment to build muscle memory.
+        Best for: Students, busy professionals, and beginners looking for a disciplined, long-term skillset.`,
+        price: 25
+      }
+    };
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || {};
+
+    function showProducts() {
+      document.getElementById('products').classList.remove('hidden');
+      document.getElementById('productDetail').classList.add('hidden');
+      document.getElementById('cartSection').classList.add('hidden');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function showProductDetail(productKey) {
+      const product = products[productKey];
+      document.getElementById('productTitle').innerText = product.title;
+      document.getElementById('productShortDesc').innerText = product.shortDesc;
+      document.getElementById('productLongDesc').innerText = product.longDesc;
+      document.getElementById('productQty').value = 1;
+      document.getElementById('products').classList.add('hidden');
+      document.getElementById('productDetail').classList.remove('hidden');
+      document.getElementById('cartSection').classList.add('hidden');
+      window.scrollTo({top:0, behavior:'smooth'});
+      window.currentProduct = productKey;
+    }
+
+    function addToCart() {
+      const qty = parseInt(document.getElementById('productQty').value);
+      const key = window.currentProduct;
+      if(cart[key]) { cart[key] += qty; } else { cart[key] = qty; }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      showCart();
+    }
+
+    function showCart() {
+      const tbody = document.getElementById('cartTable');
+      tbody.innerHTML = '';
+      let total = 0;
+      for(const key in cart) {
+        const qty = cart[key];
+        const product = products[key];
+        const lineTotal = qty * product.price;
+        total += lineTotal;
+        tbody.innerHTML += `
+          <tr>
+            <td class="py-2">${product.title}</td>
+            <td class="py-2">$${product.price}</td>
+            <td class="py-2">${qty}</td>
+            <td class="py-2">$${lineTotal}</td>
+            <td class="py-2"><button onclick="removeFromCart('${key}')" class="text-red-400 hover:text-red-500">X</button></td>
+          </tr>
+        `;
+      }
+      document.getElementById('grandTotal').innerText = total;
+      document.getElementById('products').classList.add('hidden');
+      document.getElementById('productDetail').classList.add('hidden');
+      document.getElementById('cartSection').classList.remove('hidden');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function removeFromCart(key) {
+      delete cart[key];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      showCart();
+    }
+
+    function backToProducts() { showProducts(); }
+
+    // Reveal animations
+    const reveals = document.querySelectorAll('.reveal');
+    window.addEventListener('scroll', () => {
+      for(const el of reveals) {
+        const top = el.getBoundingClientRect().top;
+        if(top < window.innerHeight - 100) el.classList.add('active');
+      }
+    });
+    // Activate on load
+    window.addEventListener('load', ()=>{ for(const el of reveals) el.classList.add('active'); });
+  </script>
 </body>
 </html>
