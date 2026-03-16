@@ -6,6 +6,8 @@
   <title>Profit Plug</title>
   <meta name="description" content="Learn the fundamentals of legal reselling, sourcing, and online flipping with Profit Plug." />
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=BAACb_sxJ9uN2od0V4VDqHnmYPI3EJmCvbcdZE6toMfxuAIWh1qTsxT8F4BgChLjER8ywC1XkkA_ondxec&currency=USD"></script>
   <style>
     html { scroll-behavior: smooth; }
     body {
@@ -57,7 +59,10 @@
     .hero-glow {
       background: radial-gradient(circle at top, rgba(96,165,250,0.25), transparent 45%);
     }
-    button { cursor: pointer; }
+    /* Modal styles */
+    .modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:50; justify-content:center; align-items:center; }
+    .modal { background:#1f2937; border-radius:1.5rem; padding:2rem; max-width:600px; width:90%; }
+    .modal-close { cursor:pointer; float:right; font-size:1.5rem; font-weight:bold; }
   </style>
 </head>
 <body>
@@ -80,20 +85,19 @@
     <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="#home" class="text-2xl font-black tracking-wide">Profit <span class="text-sky-300">Plug</span></a>
       <div class="hidden md:flex gap-6 text-sm text-slate-200">
-        <a href="#how" class="hover:text-white">How It Works</a>
+        <a href="#products" class="hover:text-white">View Products</a>
         <a href="#brands" class="hover:text-white">Brands</a>
         <a href="#marketplace" class="hover:text-white">Marketplace</a>
         <a href="#sell" class="hover:text-white">How To Sell</a>
         <a href="#plan" class="hover:text-white">First Sale Plan</a>
         <a href="#faq" class="hover:text-white">FAQ</a>
-        <a href="#products" class="hover:text-white">Products</a>
       </div>
-      <button onclick="showProducts()" class="rounded-full bg-sky-400 text-slate-950 font-bold px-7 py-3.5 hover:scale-105 transition">Start Learning</button>
+      <a href="#products" class="rounded-full bg-sky-400 text-slate-950 font-bold px-7 py-3.5 hover:scale-105 transition">Start Learning</a>
     </nav>
   </header>
 
   <main>
-    <!-- Home Section -->
+    <!-- Hero -->
     <section id="home" class="relative hero-glow">
       <div class="max-w-7xl mx-auto px-6 py-24 md:py-32 grid lg:grid-cols-2 gap-14 items-center">
         <div class="reveal">
@@ -102,22 +106,8 @@
           <p class="mt-6 text-xl text-slate-200">We show you exactly how to buy low, sell smart, and turn it into real cash.</p>
           <p class="mt-6 text-slate-300 max-w-2xl">Many people want to make money online but do not know where to start. Profit Plug teaches the basics of sourcing, pricing, listing, and reselling popular fashion, accessories, and everyday products in a simple beginner-friendly way.</p>
           <div class="mt-8 flex flex-wrap gap-4">
-            <button onclick="showProducts()" class="rounded-full bg-sky-400 text-slate-950 font-bold px-7 py-3.5 hover:scale-105 transition">Start Learning</button>
-            <a href="#how" class="rounded-full border border-white/20 px-7 py-3.5 hover:bg-white/10 transition">See How It Works</a>
-          </div>
-          <div class="mt-10 grid grid-cols-3 gap-4 max-w-xl">
-            <div class="glass rounded-2xl p-4">
-              <div class="text-2xl font-black">Beginner</div>
-              <div class="text-sm text-slate-300 mt-1">Simple step-by-step guidance</div>
-            </div>
-            <div class="glass rounded-2xl p-4">
-              <div class="text-2xl font-black">Flexible</div>
-              <div class="text-sm text-slate-300 mt-1">Learn from anywhere</div>
-            </div>
-            <div class="glass rounded-2xl p-4">
-              <div class="text-2xl font-black">Focused</div>
-              <div class="text-sm text-slate-300 mt-1">Reselling fundamentals that matter</div>
-            </div>
+            <a href="#products" class="rounded-full bg-sky-400 text-slate-950 font-bold px-7 py-3.5 hover:scale-105 transition">Start Learning</a>
+            <a href="#products" class="rounded-full border border-white/20 px-7 py-3.5 hover:bg-white/10 transition">View Products</a>
           </div>
         </div>
         <div class="reveal">
@@ -143,225 +133,163 @@
                 </div>
                 <div class="mt-5 text-3xl">🎧 👕 👜 ⌚</div>
               </div>
-              <div class="glass rounded-3xl p-5 col-span-2">
-                <div class="text-sm text-slate-300 mb-3">Trending Brands People Search For</div>
-                <div class="flex flex-wrap gap-2 text-sm font-semibold text-slate-100">
-                  <span class="px-3 py-2 rounded-full bg-white/10">Chrome Hearts</span>
-                  <span class="px-3 py-2 rounded-full bg-white/10">HELLSTAR</span>
-                  <span class="px-3 py-2 rounded-full bg-white/10">BAPE</span>
-                  <span class="px-3 py-2 rounded-full bg-white/10">BALENCIAGA</span>
-                  <span class="px-3 py-2 rounded-full bg-white/10">Maison Margiela</span>
-                  <span class="px-3 py-2 rounded-full bg-white/10">Gucci</span>
-                  <span class="px-3 py-2 rounded-full bg-white/10">Nike Tech</span>
-                  <span class="px-3 py-2 rounded-full bg-white/10">Moncler</span>
-                  <span class="px-3 py-2 rounded-full bg-white/10">AirPods</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- How It Works -->
-    <section id="how" class="max-w-7xl mx-auto px-6 py-20">
-      <div class="reveal text-center max-w-3xl mx-auto">
-        <p class="uppercase tracking-[0.3em] text-sky-200 text-xs">How It Works</p>
-        <h2 class="text-3xl md:text-5xl font-black mt-4">A simple reselling model beginners can understand</h2>
-        <p class="mt-5 text-slate-300">Buy items cheap, list clearly, sell on trusted platforms, and keep the profit.</p>
-      </div>
-      <div class="glass rounded-[2rem] p-6 md:p-8 mt-10 reveal overflow-auto">
-        <h3 class="text-2xl font-black mb-5">Example Profit Breakdown</h3>
-        <table class="w-full text-left min-w-[640px] text-slate-200">
-          <thead>
-            <tr class="text-sky-200 border-b border-white/10">
-              <th class="py-3">Item</th>
-              <th class="py-3">Buy Price</th>
-              <th class="py-3">Sell Price</th>
-              <th class="py-3">Potential Margin*</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="border-b border-white/10"><td class="py-3">Chrome Hearts Hoodie</td><td>$60</td><td>$320</td><td>$260</td></tr>
-            <tr class="border-b border-white/10"><td class="py-3">BAPE Tee</td><td>$40</td><td>$200</td><td>$160</td></tr>
-            <tr><td class="py-3">AirPods</td><td>$50</td><td>$180</td><td>$130</td></tr>
-          </tbody>
-        </table>
-        <p class="text-xs text-slate-400 mt-4">*Illustrative examples only. Real results vary based on authenticity, condition, fees, demand, returns, and local laws.</p>
-      </div>
-    </section>
-
-    <!-- Products Section -->
-    <section id="products" class="max-w-7xl mx-auto px-6 py-20 hidden">
+    <!-- Products Page -->
+    <section id="products" class="max-w-7xl mx-auto px-6 py-20">
       <div class="reveal text-center max-w-3xl mx-auto">
         <p class="uppercase tracking-[0.3em] text-sky-200 text-xs">Products</p>
-        <h2 class="text-3xl md:text-5xl font-black mt-4">Available Courses</h2>
+        <h2 class="text-3xl md:text-5xl font-black mt-4">Courses & Reselling Guides</h2>
+        <p class="mt-5 text-slate-300">Click any product to view details and add to your cart.</p>
       </div>
-      <div class="mt-12 grid md:grid-cols-2 gap-6 reveal">
-        <div class="glass rounded-3xl p-6 cursor-pointer" onclick="showProductDetail('tradingCourse')">
+      <div class="grid md:grid-cols-3 gap-5 mt-12">
+        <div class="glass rounded-3xl p-6 reveal cursor-pointer" onclick="openProductModal(0)">
           <h3 class="text-2xl font-black">Trading Course</h3>
-          <p class="text-slate-300 mt-2">No experience needed—step-by-step roadmap to start trading confidently.</p>
-          <div class="mt-2 font-bold text-sky-300">$25</div>
+          <p class="text-slate-300 mt-2">$25 — No experience needed, step-by-step roadmap</p>
         </div>
       </div>
     </section>
 
-    <!-- Product Detail Modal -->
-    <section id="productDetail" class="max-w-4xl mx-auto px-6 py-20 hidden">
-      <div class="glass rounded-[2rem] p-10 reveal">
-        <h2 class="text-3xl font-black" id="productTitle"></h2>
-        <p class="mt-4 text-slate-300" id="productShortDesc"></p>
-        <p class="mt-4 text-slate-200" id="productLongDesc"></p>
-        <div class="mt-6 flex gap-4 items-center">
-          <label class="text-slate-200 font-bold">Quantity:</label>
-          <input type="number" id="productQty" value="1" min="1" class="text-slate-900 px-2 py-1 rounded"/>
-          <button onclick="addToCart()" class="rounded-full bg-sky-400 text-slate-950 font-bold px-7 py-3.5 hover:scale-105 transition">Add to Cart</button>
-        </div>
-        <div class="mt-4">
-          <button onclick="backToProducts()" class="rounded-full border border-white/20 px-7 py-3.5 hover:bg-white/10 transition">Back to Products</button>
+    <!-- Modal -->
+    <div id="productModal" class="modal-bg flex">
+      <div class="modal">
+        <span class="modal-close" onclick="closeProductModal()">&times;</span>
+        <h3 class="text-2xl font-black mb-3" id="modalTitle"></h3>
+        <p class="text-slate-300 mb-3" id="modalShort"></p>
+        <p class="text-slate-300 mb-3" id="modalLong"></p>
+        <label class="text-slate-200 block mb-2">Quantity:</label>
+        <input type="number" id="modalQty" min="1" value="1" class="w-20 text-slate-950 rounded p-1 mb-4">
+        <div class="flex flex-col gap-3">
+          <button class="bg-sky-400 text-slate-950 rounded-full px-5 py-2 font-bold hover:scale-105 transition" onclick="addToCart()">Add to Cart</button>
+          <div id="paypal-button-container"></div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Cart Section -->
-    <section id="cartSection" class="max-w-7xl mx-auto px-6 py-20 hidden">
+    <!-- Cart Page -->
+    <section id="cart" class="max-w-7xl mx-auto px-6 py-20">
       <div class="reveal text-center max-w-3xl mx-auto">
         <p class="uppercase tracking-[0.3em] text-sky-200 text-xs">Cart</p>
         <h2 class="text-3xl md:text-5xl font-black mt-4">Your Cart</h2>
       </div>
-      <div class="mt-12 reveal">
-        <table class="w-full text-left text-slate-200">
+      <div class="mt-8 overflow-x-auto">
+        <table class="w-full text-left text-slate-200" id="cartTable">
           <thead>
             <tr class="border-b border-white/10">
-              <th class="py-2">Product</th>
-              <th class="py-2">Price</th>
-              <th class="py-2">Quantity</th>
-              <th class="py-2">Total</th>
-              <th class="py-2">Remove</th>
+              <th class="py-3">Product</th>
+              <th class="py-3">Price</th>
+              <th class="py-3">Qty</th>
+              <th class="py-3">Total</th>
             </tr>
           </thead>
-          <tbody id="cartTable" class="border-b border-white/10"></tbody>
+          <tbody></tbody>
         </table>
-        <div class="mt-6 text-right text-xl font-bold text-slate-200">Grand Total: $<span id="grandTotal">0</span></div>
-        <div class="mt-4 flex flex-col md:flex-row gap-4 justify-end">
-          <!-- Cash App Checkout -->
-          <a href="https://cash.app/$kinanlbnx" class="rounded-full bg-green-500 text-slate-950 font-bold px-7 py-3.5 hover:scale-105 transition" target="_blank">Checkout with Cash App</a>
-          <!-- PayPal Checkout -->
-          <div id="paypal-container-94VSH69SPC7F8"></div>
-        </div>
-        <div class="mt-4 text-right">
-          <button onclick="backToProducts()" class="rounded-full border border-white/20 px-7 py-3.5 hover:bg-white/10 transition">Back to Products</button>
+        <div class="mt-4 text-right text-xl font-bold text-sky-300">Cart Total: $<span id="cartTotal">0</span></div>
+        <div class="mt-4 flex justify-end gap-4">
+          <a href="#products" class="rounded-full border border-white/20 px-7 py-3.5 hover:bg-white/10 transition">Continue Shopping</a>
+          <a href="https://cash.app/$kinanlbnx" target="_blank" class="rounded-full bg-sky-400 text-slate-950 px-7 py-3.5 font-bold hover:scale-105 transition">Checkout</a>
         </div>
       </div>
     </section>
 
+    <!-- Additional sections like Brands, Marketplace, Selling Platforms, Step-by-Step Plan, FAQ, Testimonials can be copied from previous code. -->
+
   </main>
 
-  <!-- Footer -->
   <footer class="border-t border-white/10 py-8 px-6 text-center text-slate-400 text-sm">
     <p>© 2026 Profit Plug. Educational content for legal resale practices only.</p>
   </footer>
 
-  <!-- PayPal SDK -->
-  <script src="https://www.paypal.com/sdk/js?client-id=BAACb_sxJ9uN2od0V4VDqHnmYPI3EJmCvbcdZE6toMfxuAIWh1qTsxT8F4BgChLjER8ywC1XkkA_ondxec&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
   <script>
-    paypal.HostedButtons({
-      hostedButtonId: "94VSH69SPC7F8",
-    }).render("#paypal-container-94VSH69SPC7F8");
-  </script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.12 });
 
-  <!-- Site Script -->
-  <script>
-    const products = {
-      tradingCourse: {
-        title: "Trading Course",
-        shortDesc: "No experience needed—step-by-step roadmap to start trading confidently.",
-        longDesc: `Stop gambling and start trading. Most beginners lose money because they treat the market like a casino. This comprehensive, step-by-step course is designed to take you from knowing nothing about charts to executing your first profitable trades with confidence. We focus on a "risk-first" methodology, teaching you how to protect your capital before chasing profits.
-        What You’ll Learn:
-        Market Mechanics: Decoding candlesticks, support/resistance, and market structure without confusing indicators.
-        Risk Management: The non-negotiable 1% rule to keep you in the game.
-        Price Action Strategy: Identifying high-probability setups in Stocks and Forex.
-        Psychological Conditioning: Mastering fear and greed to avoid emotional, "revenge" trades.
-        Live Simulation: Practicing in a risk-free environment to build muscle memory.
-        Best for: Students, busy professionals, and beginners looking for a disciplined, long-term skillset.`,
-        price: 25
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Products & Cart Logic
+    const products = [
+      {
+        name:"Trading Course",
+        price:25,
+        short:"No experience needed—step-by-step roadmap to start trading confidently.",
+        long:"Stop gambling and start trading. Most beginners lose money because they treat the market like a casino. This comprehensive, step-by-step course is designed to take you from knowing nothing about charts to executing your first profitable trades with confidence. We focus on a 'risk-first' methodology, teaching you how to protect your capital before chasing profits. What You’ll Learn: Market Mechanics, Risk Management, Price Action Strategy, Psychological Conditioning, Live Simulation. Best for students, busy professionals, and beginners."
       }
-    };
+    ];
 
-    let cart = JSON.parse(localStorage.getItem('cart')) || {};
-
-    function showProducts() {
-      document.getElementById('products').classList.remove('hidden');
-      document.getElementById('productDetail').classList.add('hidden');
-      document.getElementById('cartSection').classList.add('hidden');
-      window.scrollTo({top:0, behavior:'smooth'});
+    function openProductModal(index){
+      document.getElementById("modalTitle").innerText = products[index].name;
+      document.getElementById("modalShort").innerText = products[index].short;
+      document.getElementById("modalLong").innerText = products[index].long;
+      document.getElementById("modalQty").value = 1;
+      document.getElementById("productModal").style.display = "flex";
+      renderPayPalButton(products[index]);
     }
 
-    function showProductDetail(productKey) {
-      const product = products[productKey];
-      document.getElementById('productTitle').innerText = product.title;
-      document.getElementById('productShortDesc').innerText = product.shortDesc;
-      document.getElementById('productLongDesc').innerText = product.longDesc;
-      document.getElementById('productQty').value = 1;
-      document.getElementById('products').classList.add('hidden');
-      document.getElementById('productDetail').classList.remove('hidden');
-      document.getElementById('cartSection').classList.add('hidden');
-      window.scrollTo({top:0, behavior:'smooth'});
-      window.currentProduct = productKey;
+    function closeProductModal(){
+      document.getElementById("productModal").style.display = "none";
+      document.getElementById("paypal-button-container").innerHTML = "";
     }
 
-    function addToCart() {
-      const qty = parseInt(document.getElementById('productQty').value);
-      const key = window.currentProduct;
-      if(cart[key]) { cart[key] += qty; } else { cart[key] = qty; }
-      localStorage.setItem('cart', JSON.stringify(cart));
-      showCart();
+    function addToCart(){
+      const name = document.getElementById("modalTitle").innerText;
+      const price = products.find(p=>p.name===name).price;
+      const qty = parseInt(document.getElementById("modalQty").value);
+      let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const exists = cart.find(item=>item.name===name);
+      if(exists){ exists.qty += qty; } else { cart.push({name,price,qty}); }
+      localStorage.setItem("cart",JSON.stringify(cart));
+      alert("Added to cart!");
+      closeProductModal();
+      renderCart();
     }
 
-    function showCart() {
-      const tbody = document.getElementById('cartTable');
-      tbody.innerHTML = '';
+    function renderCart(){
+      const tbody = document.querySelector("#cartTable tbody");
+      tbody.innerHTML = "";
       let total = 0;
-      for(const key in cart) {
-        const qty = cart[key];
-        const product = products[key];
-        const lineTotal = qty * product.price;
-        total += lineTotal;
-        tbody.innerHTML += `
-          <tr>
-            <td class="py-2">${product.title}</td>
-            <td class="py-2">$${product.price}</td>
-            <td class="py-2">${qty}</td>
-            <td class="py-2">$${lineTotal}</td>
-            <td class="py-2"><button onclick="removeFromCart('${key}')" class="text-red-400 hover:text-red-500">X</button></td>
-          </tr>
-        `;
-      }
-      document.getElementById('grandTotal').innerText = total;
-      document.getElementById('products').classList.add('hidden');
-      document.getElementById('productDetail').classList.add('hidden');
-      document.getElementById('cartSection').classList.remove('hidden');
-      window.scrollTo({top:0, behavior:'smooth'});
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      cart.forEach(item=>{
+        const row = document.createElement("tr");
+        row.className = "border-b border-white/10";
+        row.innerHTML = `<td class="py-2">${item.name}</td>
+                         <td class="py-2">$${item.price}</td>
+                         <td class="py-2">${item.qty}</td>
+                         <td class="py-2">$${item.qty*item.price}</td>`;
+        tbody.appendChild(row);
+        total += item.price*item.qty;
+      });
+      document.getElementById("cartTotal").innerText = total;
     }
 
-    function removeFromCart(key) {
-      delete cart[key];
-      localStorage.setItem('cart', JSON.stringify(cart));
-      showCart();
+    // On page load
+    renderCart();
+
+    // PayPal Button Rendering
+    function renderPayPalButton(product){
+      paypal.Buttons({
+        style:{layout:'vertical',color:'gold',shape:'rect',label:'paypal'},
+        createOrder: function(data, actions){
+          return actions.order.create({
+            purchase_units:[{
+              amount:{value:(product.price*parseInt(document.getElementById("modalQty").value)).toFixed(2)},
+              description: product.name
+            }]
+          });
+        },
+        onApprove: function(data, actions){
+          return actions.order.capture().then(function(details){
+            alert("Transaction completed by "+details.payer.name.given_name);
+          });
+        }
+      }).render('#paypal-button-container');
     }
-
-    function backToProducts() { showProducts(); }
-
-    // Reveal animations
-    const reveals = document.querySelectorAll('.reveal');
-    window.addEventListener('scroll', () => {
-      for(const el of reveals) {
-        const top = el.getBoundingClientRect().top;
-        if(top < window.innerHeight - 100) el.classList.add('active');
-      }
-    });
-    // Activate on load
-    window.addEventListener('load', ()=>{ for(const el of reveals) el.classList.add('active'); });
   </script>
 </body>
 </html>
