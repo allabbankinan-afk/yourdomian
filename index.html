@@ -6,7 +6,6 @@
   <title>Profit Plug</title>
   <meta name="description" content="Learn the fundamentals of legal reselling, sourcing, and online flipping with Profit Plug." />
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=BAACb_sxJ9uN2od0V4VDqHnmYPI3EJmCvbcdZE6toMfxuAIWh1qTsxT8F4BgChLjER8ywC1XkkA_ondxec&currency=USD"></script>
   <style>
     html { scroll-behavior: smooth; }
@@ -39,34 +38,21 @@
       0%,100% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
     }
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: all 0.8s ease;
-    }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .money-bar {
-      animation: grow 2.4s ease forwards;
-      transform-origin: bottom;
-      transform: scaleY(0.25);
-    }
-    @keyframes grow {
-      to { transform: scaleY(1); }
-    }
-    .hero-glow {
-      background: radial-gradient(circle at top, rgba(96,165,250,0.25), transparent 45%);
-    }
-    /* Modal styles */
-    .modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:50; justify-content:center; align-items:center; }
-    .modal { background:#1f2937; border-radius:1.5rem; padding:2rem; max-width:600px; width:90%; }
-    .modal-close { cursor:pointer; float:right; font-size:1.5rem; font-weight:bold; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: all 0.8s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .money-bar { animation: grow 2.4s ease forwards; transform-origin: bottom; transform: scaleY(0.25); }
+    @keyframes grow { to { transform: scaleY(1); } }
+    .hero-glow { background: radial-gradient(circle at top, rgba(96,165,250,0.25), transparent 45%); }
+    /* Cart styling */
+    .cart-section { display:none; }
+    .cart-visible { display:block; }
+    table { width:100%; border-collapse: collapse; }
+    th, td { padding: 0.5rem; text-align:left; border-bottom: 1px solid rgba(255,255,255,0.2); }
+    .btn { cursor:pointer; }
   </style>
 </head>
 <body>
-  <!-- Stars Background -->
+  <!-- Stars -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden">
     <div class="star" style="top:8%; left:10%; animation-delay:0.2s"></div>
     <div class="star" style="top:18%; left:30%; animation-delay:1.6s"></div>
@@ -107,33 +93,6 @@
           <p class="mt-6 text-slate-300 max-w-2xl">Many people want to make money online but do not know where to start. Profit Plug teaches the basics of sourcing, pricing, listing, and reselling popular fashion, accessories, and everyday products in a simple beginner-friendly way.</p>
           <div class="mt-8 flex flex-wrap gap-4">
             <a href="#products" class="rounded-full bg-sky-400 text-slate-950 font-bold px-7 py-3.5 hover:scale-105 transition">Start Learning</a>
-            <a href="#products" class="rounded-full border border-white/20 px-7 py-3.5 hover:bg-white/10 transition">View Products</a>
-          </div>
-        </div>
-        <div class="reveal">
-          <div class="glass rounded-[2rem] p-6 md:p-8 relative overflow-hidden">
-            <div class="absolute -top-10 -right-8 w-32 h-32 bg-sky-300/20 rounded-full blur-3xl"></div>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="glass rounded-3xl p-5 floaty">
-                <div class="text-sm text-slate-300">Money Growth</div>
-                <div class="mt-5 h-32 flex items-end gap-2">
-                  <div class="money-bar w-8 rounded-t-xl bg-sky-300 h-12"></div>
-                  <div class="money-bar w-8 rounded-t-xl bg-sky-300 h-16" style="animation-delay:0.2s"></div>
-                  <div class="money-bar w-8 rounded-t-xl bg-sky-300 h-24" style="animation-delay:0.4s"></div>
-                  <div class="money-bar w-8 rounded-t-xl bg-sky-300 h-32" style="animation-delay:0.6s"></div>
-                </div>
-              </div>
-              <div class="glass rounded-3xl p-5">
-                <div class="text-sm text-slate-300">Popular Categories</div>
-                <div class="mt-4 flex flex-wrap gap-2 text-xs">
-                  <span class="px-3 py-1.5 rounded-full bg-white/10">Designer Wear</span>
-                  <span class="px-3 py-1.5 rounded-full bg-white/10">Sneakers</span>
-                  <span class="px-3 py-1.5 rounded-full bg-white/10">Audio Tech</span>
-                  <span class="px-3 py-1.5 rounded-full bg-white/10">Accessories</span>
-                </div>
-                <div class="mt-5 text-3xl">🎧 👕 👜 ⌚</div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -143,60 +102,72 @@
     <section id="products" class="max-w-7xl mx-auto px-6 py-20">
       <div class="reveal text-center max-w-3xl mx-auto">
         <p class="uppercase tracking-[0.3em] text-sky-200 text-xs">Products</p>
-        <h2 class="text-3xl md:text-5xl font-black mt-4">Courses & Reselling Guides</h2>
-        <p class="mt-5 text-slate-300">Click any product to view details and add to your cart.</p>
+        <h2 class="text-3xl md:text-5xl font-black mt-4">Choose Your Course</h2>
+        <p class="mt-5 text-slate-300">Select a course to add to your cart and start learning today.</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-5 mt-12">
-        <div class="glass rounded-3xl p-6 reveal cursor-pointer" onclick="openProductModal(0)">
+
+      <div class="mt-12 grid md:grid-cols-2 gap-6">
+        <div class="glass rounded-3xl p-6 reveal">
           <h3 class="text-2xl font-black">Trading Course</h3>
-          <p class="text-slate-300 mt-2">$25 — No experience needed, step-by-step roadmap</p>
+          <p class="mt-2 text-slate-300">No experience needed — step-by-step roadmap to start trading confidently.</p>
+          <p class="mt-2 text-slate-200 font-bold">$25</p>
+          <div class="mt-4 flex gap-2">
+            <input type="number" min="1" value="1" class="w-16 px-2 rounded" id="trading-qty">
+            <button class="btn rounded-full bg-sky-400 text-slate-950 font-bold px-4 py-2" onclick="addToCart('Trading Course',25,'trading-qty')">Add to Cart</button>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Modal -->
-    <div id="productModal" class="modal-bg flex">
-      <div class="modal">
-        <span class="modal-close" onclick="closeProductModal()">&times;</span>
-        <h3 class="text-2xl font-black mb-3" id="modalTitle"></h3>
-        <p class="text-slate-300 mb-3" id="modalShort"></p>
-        <p class="text-slate-300 mb-3" id="modalLong"></p>
-        <label class="text-slate-200 block mb-2">Quantity:</label>
-        <input type="number" id="modalQty" min="1" value="1" class="w-20 text-slate-950 rounded p-1 mb-4">
-        <div class="flex flex-col gap-3">
-          <button class="bg-sky-400 text-slate-950 rounded-full px-5 py-2 font-bold hover:scale-105 transition" onclick="addToCart()">Add to Cart</button>
-          <div id="paypal-button-container"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cart Page -->
-    <section id="cart" class="max-w-7xl mx-auto px-6 py-20">
-      <div class="reveal text-center max-w-3xl mx-auto">
-        <p class="uppercase tracking-[0.3em] text-sky-200 text-xs">Cart</p>
-        <h2 class="text-3xl md:text-5xl font-black mt-4">Your Cart</h2>
-      </div>
-      <div class="mt-8 overflow-x-auto">
-        <table class="w-full text-left text-slate-200" id="cartTable">
+    <!-- Cart Section -->
+    <section id="cart" class="cart-section max-w-7xl mx-auto px-6 py-20">
+      <div class="glass rounded-[2rem] p-10 md:p-14">
+        <h2 class="text-3xl md:text-5xl font-black mb-6">Your Cart</h2>
+        <table id="cart-table">
           <thead>
-            <tr class="border-b border-white/10">
-              <th class="py-3">Product</th>
-              <th class="py-3">Price</th>
-              <th class="py-3">Qty</th>
-              <th class="py-3">Total</th>
+            <tr>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
-        <div class="mt-4 text-right text-xl font-bold text-sky-300">Cart Total: $<span id="cartTotal">0</span></div>
-        <div class="mt-4 flex justify-end gap-4">
-          <a href="#products" class="rounded-full border border-white/20 px-7 py-3.5 hover:bg-white/10 transition">Continue Shopping</a>
-          <a href="https://cash.app/$kinanlbnx" target="_blank" class="rounded-full bg-sky-400 text-slate-950 px-7 py-3.5 font-bold hover:scale-105 transition">Checkout</a>
-        </div>
+        <p class="mt-4 text-xl font-bold">Grand Total: $<span id="grand-total">0</span></p>
+        <div class="mt-6" id="paypal-button-container"></div>
       </div>
     </section>
 
-    <!-- Additional sections like Brands, Marketplace, Selling Platforms, Step-by-Step Plan, FAQ, Testimonials can be copied from previous code. -->
+    <!-- Other Sections -->
+    <section id="brands" class="max-w-7xl mx-auto px-6 py-20">
+      <div class="reveal text-center max-w-3xl mx-auto">
+        <p class="uppercase tracking-[0.3em] text-sky-200 text-xs">Best Selling Brands & Items</p>
+        <h2 class="text-3xl md:text-5xl font-black mt-4">Products buyers already know and search for</h2>
+        <p class="mt-5 text-slate-300">These brands hold value and sell quickly because people want authentic style without paying full retail.</p>
+      </div>
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+        <div class="glass rounded-3xl p-5 reveal">Chrome Hearts</div>
+        <div class="glass rounded-3xl p-5 reveal">HELLSTAR</div>
+        <div class="glass rounded-3xl p-5 reveal">BAPE</div>
+        <div class="glass rounded-3xl p-5 reveal">DENIM TEARS</div>
+        <div class="glass rounded-3xl p-5 reveal">BALENCIAGA</div>
+        <div class="glass rounded-3xl p-5 reveal">LULULEMON</div>
+        <div class="glass rounded-3xl p-5 reveal">MAISON MARGIELA</div>
+        <div class="glass rounded-3xl p-5 reveal">ROLEX</div>
+        <div class="glass rounded-3xl p-5 reveal">LOUIS VITTON</div>
+        <div class="glass rounded-3xl p-5 reveal">GUCCI</div>
+        <div class="glass rounded-3xl p-5 reveal">CACTUS JACK</div>
+        <div class="glass rounded-3xl p-5 reveal">NIKE TECH</div>
+        <div class="glass rounded-3xl p-5 reveal">GALLERY DEPT</div>
+        <div class="glass rounded-3xl p-5 reveal">AMIRI</div>
+        <div class="glass rounded-3xl p-5 reveal">PALM ANGELS</div>
+        <div class="glass rounded-3xl p-5 reveal">MONCLER / BROKEN PLANET</div>
+        <div class="glass rounded-3xl p-5 reveal sm:col-span-2 lg:col-span-4">AirPods & accessories</div>
+      </div>
+    </section>
+
+    <!-- Marketplace / How to Sell / Plan / FAQ / Testimonials can go here similarly -->
 
   </main>
 
@@ -205,91 +176,60 @@
   </footer>
 
   <script>
+    // Reveal animations
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('active');
-      });
+      entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.12 });
-
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-    // Products & Cart Logic
-    const products = [
-      {
-        name:"Trading Course",
-        price:25,
-        short:"No experience needed—step-by-step roadmap to start trading confidently.",
-        long:"Stop gambling and start trading. Most beginners lose money because they treat the market like a casino. This comprehensive, step-by-step course is designed to take you from knowing nothing about charts to executing your first profitable trades with confidence. We focus on a 'risk-first' methodology, teaching you how to protect your capital before chasing profits. What You’ll Learn: Market Mechanics, Risk Management, Price Action Strategy, Psychological Conditioning, Live Simulation. Best for students, busy professionals, and beginners."
-      }
-    ];
+    // Cart logic
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    function openProductModal(index){
-      document.getElementById("modalTitle").innerText = products[index].name;
-      document.getElementById("modalShort").innerText = products[index].short;
-      document.getElementById("modalLong").innerText = products[index].long;
-      document.getElementById("modalQty").value = 1;
-      document.getElementById("productModal").style.display = "flex";
-      renderPayPalButton(products[index]);
-    }
-
-    function closeProductModal(){
-      document.getElementById("productModal").style.display = "none";
-      document.getElementById("paypal-button-container").innerHTML = "";
-    }
-
-    function addToCart(){
-      const name = document.getElementById("modalTitle").innerText;
-      const price = products.find(p=>p.name===name).price;
-      const qty = parseInt(document.getElementById("modalQty").value);
-      let cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      const exists = cart.find(item=>item.name===name);
-      if(exists){ exists.qty += qty; } else { cart.push({name,price,qty}); }
-      localStorage.setItem("cart",JSON.stringify(cart));
-      alert("Added to cart!");
-      closeProductModal();
+    function addToCart(name, price, qtyId) {
+      const qty = parseInt(document.getElementById(qtyId).value);
+      const index = cart.findIndex(item => item.name === name);
+      if (index >= 0) { cart[index].qty += qty; } else { cart.push({name, price, qty}); }
+      localStorage.setItem('cart', JSON.stringify(cart));
       renderCart();
+      document.getElementById('cart').scrollIntoView({behavior:'smooth'});
     }
 
-    function renderCart(){
-      const tbody = document.querySelector("#cartTable tbody");
-      tbody.innerHTML = "";
+    function renderCart() {
+      const tbody = document.querySelector('#cart-table tbody');
+      tbody.innerHTML = '';
       let total = 0;
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      cart.forEach(item=>{
-        const row = document.createElement("tr");
-        row.className = "border-b border-white/10";
-        row.innerHTML = `<td class="py-2">${item.name}</td>
-                         <td class="py-2">$${item.price}</td>
-                         <td class="py-2">${item.qty}</td>
-                         <td class="py-2">$${item.qty*item.price}</td>`;
-        tbody.appendChild(row);
+      cart.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${item.name}</td><td>${item.qty}</td><td>$${item.price}</td><td>$${item.price*item.qty}</td>`;
+        tbody.appendChild(tr);
         total += item.price*item.qty;
       });
-      document.getElementById("cartTotal").innerText = total;
+      document.getElementById('grand-total').textContent = total;
+      // Render PayPal button
+      if(total > 0){
+        paypal.Buttons({
+          createOrder: function(data, actions) {
+            return actions.order.create({
+              purchase_units: [{
+                amount: { value: total.toFixed(2) }
+              }]
+            });
+          },
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+              alert('Transaction completed by ' + details.payer.name.given_name);
+              cart = [];
+              localStorage.removeItem('cart');
+              renderCart();
+            });
+          }
+        }).render('#paypal-button-container');
+      } else {
+        document.getElementById('paypal-button-container').innerHTML = '';
+      }
     }
 
-    // On page load
     renderCart();
-
-    // PayPal Button Rendering
-    function renderPayPalButton(product){
-      paypal.Buttons({
-        style:{layout:'vertical',color:'gold',shape:'rect',label:'paypal'},
-        createOrder: function(data, actions){
-          return actions.order.create({
-            purchase_units:[{
-              amount:{value:(product.price*parseInt(document.getElementById("modalQty").value)).toFixed(2)},
-              description: product.name
-            }]
-          });
-        },
-        onApprove: function(data, actions){
-          return actions.order.capture().then(function(details){
-            alert("Transaction completed by "+details.payer.name.given_name);
-          });
-        }
-      }).render('#paypal-button-container');
-    }
   </script>
 </body>
 </html>
