@@ -1,1 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Profit Plug Course</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+body{
+background:linear-gradient(180deg,#0b3d91,#111827);
+color:white;
+font-family:sans-serif;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:60px 20px;
+}
+
+.page{
+display:none;
+}
+
+.active{
+display:block;
+}
+
+button{
+background:#38bdf8;
+color:black;
+padding:10px 20px;
+border-radius:30px;
+font-weight:bold;
+margin:10px;
+}
+
+.lock{
+text-align:center;
+padding:120px 20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="locked" class="lock">
+
+<h1 class="text-4xl font-bold mb-6">
+Course Locked
+</h1>
+
+<p class="mb-6">
+Purchase the Profit Plug course to unlock all 20 lessons.
+</p>
+
+<a href="index.html">
+<button>Go Back</button>
+</a>
+
+</div>
+
+
+
+<div id="courseContent" class="container" style="display:none">
+
+<h1 class="text-4xl font-bold mb-6 text-center">
+Profit Plug Course
+</h1>
+
+
+<div class="page active">
+<h2 class="text-2xl font-bold mb-4">Page 1: Introduction</h2>
+<p>Reselling means buying products cheap and selling for profit.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 2: Brand Research</h2>
+<p>Focus on trending brands like Chrome Hearts, BAPE and Denim Tears.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 3: Starting Budget</h2>
+<p>Start with as little as $35 and scale profits over time.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 4: Finding Vendors</h2>
+<p>Always verify vendors and confirm pricing.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 5: Taking Photos</h2>
+<p>Use natural lighting and clear backgrounds.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 6: Writing Listings</h2>
+<p>Use simple titles with brand and size.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 7: Pricing</h2>
+<p>Example: Buy $60 hoodie → Sell $320.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 8: Depop</h2>
+<p>Upload photos, title, hashtags and price.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 9: OfferUp</h2>
+<p>Focus on local buyers.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 10: Facebook Marketplace</h2>
+<p>Huge audience for selling items.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 11: Shipping</h2>
+<p>Always include tracking.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 12: Accessories</h2>
+<p>AirPods and tech sell quickly.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 13: First Sale Plan</h2>
+<p>Buy → list → sell within 2-3 weeks.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 14: Mistakes</h2>
+<p>Bad photos and high pricing slow sales.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 15: Scaling</h2>
+<p>Sell multiple items across platforms.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 16: Advanced Tips</h2>
+<p>Follow seasonal trends.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 17: Vendor Access</h2>
+<p>Vendor lists provide trusted suppliers.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 18: FAQ</h2>
+<p>No experience needed.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 19: Testimonials</h2>
+<p>Students making hundreds monthly.</p>
+</div>
+
+<div class="page">
+<h2 class="text-2xl font-bold mb-4">Page 20: Motivation</h2>
+<p>Stay consistent and scale your income.</p>
+</div>
+
+
+<div class="text-center mt-10">
+
+<button onclick="prev()">Previous</button>
+<button onclick="next()">Next</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+if(localStorage.getItem("courseUnlocked")==="true"){
+
+document.getElementById("locked").style.display="none"
+document.getElementById("courseContent").style.display="block"
+
+}
+
+let pages=document.querySelectorAll(".page")
+let current=0
+
+function showPage(){
+pages.forEach(p=>p.classList.remove("active"))
+pages[current].classList.add("active")
+}
+
+function next(){
+if(current < pages.length-1){
+current++
+showPage()
+}
+}
+
+function prev(){
+if(current > 0){
+current--
+showPage()
+}
+}
+
+</script>
+
+</body>
+</html>
