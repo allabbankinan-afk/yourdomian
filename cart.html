@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AYQd8kywzPLzuNCPox1-G2rsqQXTJiC9IMhZHytaxib8HstErg_jOBmSsc2amSaYpoM_5WllDsLB3oX4&currency=USD"></script>
+
+<style>
+
+body{
+background:#111827;
+color:white;
+font-family:sans-serif;
+padding:40px;
+}
+
+table{
+width:100%;
+margin-bottom:30px;
+}
+
+td{
+padding:10px;
+border-bottom:1px solid #444;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1 class="text-3xl mb-6">Your Cart</h1>
+
+<table id="cartTable"></table>
+
+<h2 id="total"></h2>
+
+<br>
+
+<div id="paypal-button-container"></div>
+
+<br>
+
+<a href="index.html">← Back to products</a>
+
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || []
+
+let table = document.getElementById("cartTable")
+
+let total = 0
+
+cart.forEach(item=>{
+
+let row = document.createElement("tr")
+
+row.innerHTML = `
+<td>${item.name}</td>
+<td>$${item.price}</td>
+<td>${item.qty}</td>
+<td>$${item.price * item.qty}</td>
+`
+
+table.appendChild(row)
+
+total += item.price * item.qty
+
+})
+
+document.getElementById("total").innerText = "Total: $" + total
+
+
+paypal.Buttons({
+
+createOrder:function(data,actions){
+
+return actions.order.create({
+
+purchase_units:[{
+amount:{
+value:total.toFixed(2)
+}
+}]
+
+})
+
+},
+
+onApprove:function(data,actions){
+
+return actions.order.capture().then(function(){
+
+alert("Payment Successful!")
+
+localStorage.removeItem("cart")
+
+window.location.href="index.html"
+
+})
+
+}
+
+}).render('#paypal-button-container')
+
+</script>
+
+</body>
+</html>
