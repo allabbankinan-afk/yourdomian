@@ -1,81 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>Cart</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script src="https://cdn.tailwindcss.com"></script>
 
 <script src="https://www.paypal.com/sdk/js?client-id=AYQd8kywzPLzuNCPox1-G2rsqQXTJiC9IMhZHytaxib8HstErg_jOBmSsc2amSaYpoM_5WllDsLB3oX4&currency=USD"></script>
 
-<style>
-
-body{
-background:#111827;
-color:white;
-font-family:sans-serif;
-padding:40px;
-}
-
-table{
-width:100%;
-margin-bottom:30px;
-}
-
-td{
-padding:10px;
-border-bottom:1px solid #444;
-}
-
-</style>
-
 </head>
 
-<body>
+<body class="bg-gray-900 text-white p-10">
 
 <h1 class="text-3xl mb-6">Your Cart</h1>
 
-<table id="cartTable"></table>
+<table id="cartTable" class="w-full mb-6"></table>
 
-<h2 id="total"></h2>
-
-<br>
+<h2 id="total" class="text-xl mb-6"></h2>
 
 <div id="paypal-button-container"></div>
 
 <br>
 
-<a href="index.html">← Back to products</a>
-
+<a href="index.html">Back</a>
 
 <script>
 
-let cart = JSON.parse(localStorage.getItem("cart")) || []
+let cart=JSON.parse(localStorage.getItem("cart"))||[]
 
-let table = document.getElementById("cartTable")
+let table=document.getElementById("cartTable")
 
-let total = 0
+let total=0
 
 cart.forEach(item=>{
 
-let row = document.createElement("tr")
+let row=document.createElement("tr")
 
-row.innerHTML = `
+row.innerHTML=`
+
 <td>${item.name}</td>
 <td>$${item.price}</td>
 <td>${item.qty}</td>
-<td>$${item.price * item.qty}</td>
+<td>$${item.price*item.qty}</td>
+
 `
 
 table.appendChild(row)
 
-total += item.price * item.qty
+total+=item.price*item.qty
 
 })
 
-document.getElementById("total").innerText = "Total: $" + total
-
+document.getElementById("total").innerText="Total: $"+total
 
 paypal.Buttons({
 
@@ -84,9 +63,9 @@ createOrder:function(data,actions){
 return actions.order.create({
 
 purchase_units:[{
-amount:{
-value:total.toFixed(2)
-}
+
+amount:{value:total.toFixed(2)}
+
 }]
 
 })
@@ -97,7 +76,7 @@ onApprove:function(data,actions){
 
 return actions.order.capture().then(function(){
 
-alert("Payment Successful!")
+alert("Payment Successful")
 
 localStorage.removeItem("cart")
 
