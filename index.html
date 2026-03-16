@@ -15,20 +15,30 @@ body{
 background:linear-gradient(180deg,#0b3d91,#111827);
 color:white;
 font-family:sans-serif;
+overflow-x:hidden;
+}
+
+/* star background */
+
+.star{
+position:fixed;
+width:2px;
+height:2px;
+background:white;
+opacity:.5;
+border-radius:50%;
 }
 
 .container{
-max-width:1000px;
+max-width:1100px;
 margin:auto;
 padding:80px 20px;
-text-align:center;
 }
 
 .card{
 background:rgba(255,255,255,0.05);
 padding:30px;
 border-radius:16px;
-margin-top:40px;
 }
 
 button{
@@ -39,33 +49,207 @@ border-radius:30px;
 font-weight:bold;
 }
 
+.nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<div class="container">
+<script>
+
+/* generate stars */
+
+for(let i=0;i<120;i++){
+
+let star=document.createElement("div")
+star.className="star"
+
+star.style.top=Math.random()*100+"%"
+star.style.left=Math.random()*100+"%"
+
+document.body.appendChild(star)
+
+}
+
+</script>
+
+
+<!-- NAVBAR -->
+
+<div class="nav">
+
+<div class="logo">
+Profit Plug
+</div>
+
+<div>
+<a href="#course" class="mr-6">Course</a>
+<a href="#profits" class="mr-6">Profits</a>
+<a href="#testimonials">Results</a>
+</div>
+
+</div>
+
+
+<!-- HERO SECTION -->
+
+<div class="container text-center">
 
 <h1 class="text-5xl font-bold mb-6">
-Profit Plug
+
+Learn How To Make Money  
+Reselling Designer Clothes
+
 </h1>
 
-<p class="text-xl mb-6">
-Learn how to make money reselling designer clothing & accessories.
+<p class="text-xl mb-8 max-w-2xl mx-auto">
+
+Profit Plug teaches you how to buy trending designer items for cheap
+and flip them online for massive profits.
+
 </p>
 
-<div class="card">
+<button onclick="addToCart()">
+Start Making Money
+</button>
 
-<h2 class="text-2xl font-bold mb-4">
-Profit Plug Reselling Course
+</div>
+
+
+<!-- PROFIT EXAMPLES -->
+
+<div id="profits" class="container">
+
+<h2 class="text-3xl font-bold mb-10 text-center">
+Real Profit Examples
 </h2>
 
-<p>
-Complete step-by-step course teaching you how to flip designer items for profit.
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="card text-center">
+<h3 class="font-bold mb-2">Chrome Hearts Hoodie</h3>
+<p>Buy: $60</p>
+<p>Sell: $320</p>
+<p class="text-sky-400 font-bold">Profit: $260</p>
+</div>
+
+<div class="card text-center">
+<h3 class="font-bold mb-2">BAPE Tee</h3>
+<p>Buy: $40</p>
+<p>Sell: $200</p>
+<p class="text-sky-400 font-bold">Profit: $160</p>
+</div>
+
+<div class="card text-center">
+<h3 class="font-bold mb-2">AirPods</h3>
+<p>Buy: $50</p>
+<p>Sell: $180</p>
+<p class="text-sky-400 font-bold">Profit: $130</p>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- WHAT YOU GET -->
+
+<div class="container">
+
+<h2 class="text-3xl font-bold mb-10 text-center">
+What You'll Learn
+</h2>
+
+<div class="grid md:grid-cols-2 gap-8">
+
+<div class="card">
+✔ How to find trending designer brands  
+<br><br>
+✔ Where to buy items for cheap  
+<br><br>
+✔ How to list items for fast sales  
+<br><br>
+✔ How to scale your reselling business
+</div>
+
+<div class="card">
+✔ Step-by-step reselling guide  
+<br><br>
+✔ Beginner friendly lessons  
+<br><br>
+✔ Real profit strategies  
+<br><br>
+✔ Vendor marketplace access
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TESTIMONIALS -->
+
+<div id="testimonials" class="container">
+
+<h2 class="text-3xl font-bold mb-10 text-center">
+Student Results
+</h2>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="card">
+“Made $400 in my first 2 weeks.”  
+<br><br>
+— Jason T
+</div>
+
+<div class="card">
+“The vendor list helped me flip my first hoodie.”  
+<br><br>
+— Kayla S
+</div>
+
+<div class="card">
+“Started with $35 and now sell every week.”  
+<br><br>
+— Malik R
+</div>
+
+</div>
+
+</div>
+
+
+<!-- COURSE CARD -->
+
+<div id="course" class="container text-center">
+
+<div class="card max-w-xl mx-auto">
+
+<h2 class="text-3xl font-bold mb-4">
+Profit Plug Course
+</h2>
+
+<p class="mb-4">
+
+Complete step-by-step guide to flipping designer clothing
+for profit.
+
 </p>
 
-<p class="text-sky-400 text-xl mt-4">
+<p class="text-sky-400 text-2xl font-bold">
 $25
 </p>
 
@@ -87,6 +271,16 @@ Access Course
 
 </div>
 
+
+<!-- FOOTER -->
+
+<div class="text-center pb-10 text-gray-400">
+
+Profit Plug © 2026
+
+</div>
+
+
 <script>
 
 function addToCart(){
@@ -94,9 +288,11 @@ function addToCart(){
 let cart=[]
 
 cart.push({
+
 name:"Profit Plug Course",
 price:25,
 qty:1
+
 })
 
 localStorage.setItem("cart",JSON.stringify(cart))
