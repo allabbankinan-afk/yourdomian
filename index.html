@@ -2,157 +2,213 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Profit Plug</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://www.paypal.com/sdk/js?client-id=AYQd8kywzPLzuNCPox1-G2rsqQXTJiC9IMhZHytaxib8HstErg_jOBmSsc2amSaYpoM_5WllDsLB3oX4&currency=USD"></script>
+
 <style>
-body {
-  font-family: Inter, sans-serif;
-  margin:0; background: linear-gradient(180deg, #0b3d91 0%, #10213a 38%, #1f2937 100%);
-  color:#f3f4f6; overflow-x:hidden;
+body{
+background:linear-gradient(180deg,#0b3d91,#111827);
+color:white;
+font-family:sans-serif;
 }
-.hidden { display:none; }
-.glass { background: rgba(255,255,255,0.08); backdrop-filter: blur(14px); border:1px solid rgba(255,255,255,0.12); border-radius:1.5rem; padding:1.5rem; }
-input[type=number]{ width:60px; padding:0.25rem; text-align:center; border-radius:6px; border:1px solid #ccc;}
-button { cursor:pointer; }
-a { cursor:pointer; }
-header { position:sticky; top:0; z-index:50; background:rgba(15,23,42,0.85); backdrop-filter:blur(8px); border-bottom:1px solid rgba(255,255,255,0.1);}
+
+.section{
+padding:80px 20px;
+max-width:1100px;
+margin:auto;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+padding:25px;
+border-radius:15px;
+margin:20px 0;
+}
+
+button{
+background:#38bdf8;
+color:black;
+padding:10px 20px;
+border-radius:25px;
+font-weight:bold;
+}
 </style>
 </head>
+
 <body>
 
-<header class="px-6 py-4 flex justify-between items-center">
-  <h1 class="text-2xl font-black text-sky-300">Profit Plug</h1>
-  <nav class="space-x-4">
-    <a onclick="showSection('home')">Home</a>
-    <a onclick="showSection('products')">Products</a>
-    <a onclick="showSection('cart')">Cart</a>
-  </nav>
-</header>
+<!-- HERO -->
+<div class="section text-center">
 
-<main>
+<h1 class="text-5xl font-bold mb-4">
+Learn How To Make Money Reselling Designer Items
+</h1>
 
-<!-- HOME SECTION -->
-<section id="home" class="p-6">
-  <div class="max-w-3xl mx-auto text-center">
-    <h2 class="text-4xl font-black mb-4">Learn How To Make Money Reselling Designer Clothes & Accessories</h2>
-    <p class="mb-4">We show you exactly how to buy low, sell smart, and turn it into real cash.</p>
-    <p class="mb-6 text-slate-300">Profit Plug teaches you how to source, price, list, and sell popular fashion, accessories, and tech products easily.</p>
-    <button class="bg-sky-400 text-slate-950 px-6 py-2 rounded-full" onclick="showSection('products')">View Products</button>
-  </div>
-</section>
+<p class="mb-6">
+Buy low. Sell high. Turn items into real cash.
+</p>
 
-<!-- PRODUCTS SECTION -->
-<section id="products" class="p-6 hidden">
-  <div class="max-w-3xl mx-auto">
-    <h2 class="text-3xl font-black mb-4">Products</h2>
-    <div class="glass mb-4">
-      <h3 class="text-xl font-bold">Trading Course</h3>
-      <p class="text-slate-300">No experience needed — step-by-step roadmap to start trading confidently.</p>
-      <p class="text-sky-300 font-bold mb-2">$25</p>
-      <div class="flex items-center gap-2 mb-3">
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" min="1" value="1">
-      </div>
-      <button class="bg-sky-400 text-slate-950 px-4 py-2 rounded-full" onclick="addToCart('Trading Course',25, document.getElementById('quantity').value)">Add to Cart</button>
-    </div>
-  </div>
-</section>
+<a href="#products">
+<button>Start Learning</button>
+</a>
 
-<!-- CART SECTION -->
-<section id="cart" class="p-6 hidden">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-3xl font-black mb-4">Your Cart</h2>
-    <table class="w-full mb-6">
-      <thead>
-        <tr>
-          <th class="text-left pb-2">Product</th>
-          <th class="text-left pb-2">Price</th>
-          <th class="text-left pb-2">Quantity</th>
-          <th class="text-left pb-2">Subtotal</th>
-          <th class="text-left pb-2">Remove</th>
-        </tr>
-      </thead>
-      <tbody id="cart-body"></tbody>
-    </table>
-    <div class="text-xl font-bold mb-4">Total: $<span id="cart-total">0</span></div>
-    <div id="paypal-button-container"></div>
-    <p class="mt-4"><a onclick="showSection('products')">Back to Products</a></p>
-  </div>
-</section>
+</div>
 
-</main>
+
+<!-- HOW IT WORKS -->
+<div class="section">
+
+<h2 class="text-3xl font-bold mb-4">How It Works</h2>
+
+<p>
+Buy items cheap from trusted vendors and sell them online for profit.
+</p>
+
+<table class="mt-4">
+<tr>
+<td>Chrome Hearts Hoodie</td>
+<td>$60 → $320</td>
+</tr>
+
+<tr>
+<td>BAPE Tee</td>
+<td>$40 → $200</td>
+</tr>
+
+<tr>
+<td>AirPods</td>
+<td>$50 → $180</td>
+</tr>
+</table>
+
+</div>
+
+
+<!-- BRANDS -->
+<div class="section">
+
+<h2 class="text-3xl font-bold mb-4">Best Selling Brands</h2>
+
+<p>
+Chrome Hearts • BAPE • Denim Tears • Balenciaga • Gucci • Nike Tech • Gallery Dept • Palm Angels • Moncler
+</p>
+
+</div>
+
+
+<!-- MARKETPLACE -->
+<div class="section">
+
+<h2 class="text-3xl font-bold mb-4">Vendor Marketplace</h2>
+
+<p>
+Get access to trusted vendors, listing templates, and reselling guides.
+</p>
+
+</div>
+
+
+<!-- SELLING PLATFORMS -->
+<div class="section">
+
+<h2 class="text-3xl font-bold mb-4">Where To Sell</h2>
+
+<p>
+Depop • OfferUp • Facebook Marketplace
+</p>
+
+</div>
+
+
+<!-- FIRST SALE PLAN -->
+<div class="section">
+
+<h2 class="text-3xl font-bold mb-4">First Sale Plan</h2>
+
+<p>
+Day 1 – Get vendors  
+Day 7 – Buy items  
+Day 10 – List items  
+Day 20 – Make first sale
+</p>
+
+</div>
+
+
+<!-- FAQ -->
+<div class="section">
+
+<h2 class="text-3xl font-bold mb-4">FAQ</h2>
+
+<p>Do I need experience? No.</p>
+<p>How much to start? $35.</p>
+
+</div>
+
+
+<!-- TESTIMONIALS -->
+<div class="section">
+
+<h2 class="text-3xl font-bold mb-4">Testimonials</h2>
+
+<p>"Made $400 in 2 weeks!" – Jason</p>
+<p>"Vendor list works great!" – Kayla</p>
+
+</div>
+
+
+
+<!-- PRODUCTS -->
+<div id="products" class="section">
+
+<h2 class="text-3xl font-bold mb-4">Products</h2>
+
+<div class="card">
+
+<h3 class="text-xl font-bold">Trading Course</h3>
+
+<p class="mb-2">
+Step-by-step guide teaching you how to start trading and making money.
+</p>
+
+<p class="text-sky-400 font-bold mb-2">$25</p>
+
+<label>Quantity</label>
+
+<input id="qty" type="number" value="1" min="1" class="text-black p-1 w-16">
+
+<br><br>
+
+<button onclick="addToCart()">Add To Cart</button>
+
+</div>
+
+</div>
+
 
 <script>
-// Show/Hide Sections
-function showSection(id){
-  document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
-  if(id==='cart') renderCart();
+
+function addToCart(){
+
+let quantity = document.getElementById("qty").value
+
+let cart = JSON.parse(localStorage.getItem("cart")) || []
+
+cart.push({
+name:"Trading Course",
+price:25,
+qty:quantity
+})
+
+localStorage.setItem("cart",JSON.stringify(cart))
+
+window.location.href="cart.html"
+
 }
 
-// CART LOGIC
-function addToCart(name, price, quantity){
-  quantity=parseInt(quantity); if(quantity<1) quantity=1;
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const existing = cart.find(item=>item.name===name);
-  if(existing){ existing.quantity += quantity; } 
-  else{ cart.push({name:name,price:price,quantity:quantity}); }
-  localStorage.setItem('cart', JSON.stringify(cart));
-  alert('Added to cart!');
-  showSection('cart');
-}
-
-function renderCart(){
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const tbody=document.getElementById('cart-body');
-  tbody.innerHTML='';
-  let total=0;
-  cart.forEach((item,index)=>{
-    const subtotal = item.price * item.quantity; total+=subtotal;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${item.name}</td>
-      <td>$${item.price}</td>
-      <td><input type="number" min="1" value="${item.quantity}" onchange="updateQuantity(${index}, this.value)"></td>
-      <td>$${subtotal}</td>
-      <td><button onclick="removeItem(${index})">X</button></td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('cart-total').textContent = total;
-  // render PayPal
-  paypal.Buttons({
-    createOrder: function(data, actions){
-      return actions.order.create({purchase_units:[{amount:{value: total.toFixed(2)}}]});
-    },
-    onApprove: function(data, actions){
-      return actions.order.capture().then(function(details){
-        alert('Transaction completed by '+details.payer.name.given_name);
-        localStorage.removeItem('cart');
-        showSection('products');
-      });
-    }
-  }).render('#paypal-button-container');
-}
-
-function updateQuantity(index, qty){
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  qty=parseInt(qty); if(qty<1) qty=1;
-  cart[index].quantity=qty;
-  localStorage.setItem('cart', JSON.stringify(cart));
-  renderCart();
-}
-
-function removeItem(index){
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  cart.splice(index,1);
-  localStorage.setItem('cart', JSON.stringify(cart));
-  renderCart();
-}
-
-// Show home by default
-showSection('home');
 </script>
+
 
 </body>
 </html>
