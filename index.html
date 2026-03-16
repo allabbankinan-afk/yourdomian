@@ -1,52 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>Profit Plug</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
+
 body{
 background:linear-gradient(180deg,#0b3d91,#111827);
 color:white;
 font-family:sans-serif;
+overflow-x:hidden;
 }
 
 .section{
-padding:80px 20px;
 max-width:1100px;
 margin:auto;
+padding:80px 20px;
 }
 
 .card{
 background:rgba(255,255,255,0.05);
+border-radius:16px;
 padding:25px;
-border-radius:15px;
-margin:20px 0;
+margin-top:25px;
 }
 
 button{
 background:#38bdf8;
 color:black;
-padding:10px 20px;
-border-radius:25px;
 font-weight:bold;
+padding:10px 20px;
+border-radius:30px;
 }
+
+.star{
+position:fixed;
+width:3px;
+height:3px;
+background:black;
+opacity:.5;
+border-radius:50%;
+}
+
 </style>
+
 </head>
 
 <body>
 
+<!-- stars -->
+<script>
+for(let i=0;i<120;i++){
+let star=document.createElement("div")
+star.className="star"
+star.style.top=Math.random()*100+"%"
+star.style.left=Math.random()*100+"%"
+document.body.appendChild(star)
+}
+</script>
+
 <!-- HERO -->
+
 <div class="section text-center">
 
-<h1 class="text-5xl font-bold mb-4">
-Learn How To Make Money Reselling Designer Items
+<h1 class="text-5xl font-bold mb-6">
+
+Learn How To Make Money Reselling  
+Designer Clothes & Accessories
+
 </h1>
 
-<p class="mb-6">
-Buy low. Sell high. Turn items into real cash.
+<p class="text-xl mb-4">
+
+We show you exactly how to buy low, sell high, and turn it into real cash
+
+</p>
+
+<p class="max-w-2xl mx-auto mb-6">
+
+Many people want to make money online but don't know where to start.
+Reselling designer clothing, sneakers, AirPods and accessories is one
+of the easiest ways. We teach you step-by-step how we did it.
+
 </p>
 
 <a href="#products">
@@ -55,128 +96,210 @@ Buy low. Sell high. Turn items into real cash.
 
 </div>
 
-
 <!-- HOW IT WORKS -->
+
 <div class="section">
 
-<h2 class="text-3xl font-bold mb-4">How It Works</h2>
+<h2 class="text-3xl font-bold mb-6">How It Works</h2>
 
-<p>
-Buy items cheap from trusted vendors and sell them online for profit.
+<p class="mb-4">
+
+Buy items cheap from vendors ($30-$200),
+list them on platforms like Depop, OfferUp or Facebook Marketplace,
+then sell them for $150-$1000+ depending on the brand.
+
 </p>
 
-<table class="mt-4">
+<table class="w-full mt-6">
+
+<tr class="border-b">
+<th>Item</th>
+<th>Buy</th>
+<th>Sell</th>
+<th>Profit</th>
+</tr>
+
 <tr>
 <td>Chrome Hearts Hoodie</td>
-<td>$60 → $320</td>
+<td>$60</td>
+<td>$320</td>
+<td>$260</td>
 </tr>
 
 <tr>
 <td>BAPE Tee</td>
-<td>$40 → $200</td>
+<td>$40</td>
+<td>$200</td>
+<td>$160</td>
 </tr>
 
 <tr>
 <td>AirPods</td>
-<td>$50 → $180</td>
+<td>$50</td>
+<td>$180</td>
+<td>$130</td>
 </tr>
+
 </table>
 
-</div>
+<p class="mt-6">
 
+Even starting with only $35 you can make your first profit fast.
+
+</p>
+
+</div>
 
 <!-- BRANDS -->
+
 <div class="section">
 
-<h2 class="text-3xl font-bold mb-4">Best Selling Brands</h2>
+<h2 class="text-3xl font-bold mb-6">Best Selling Brands</h2>
 
-<p>
-Chrome Hearts • BAPE • Denim Tears • Balenciaga • Gucci • Nike Tech • Gallery Dept • Palm Angels • Moncler
-</p>
+<div class="grid md:grid-cols-4 gap-4 text-center">
+
+<div class="card">Chrome Hearts</div>
+<div class="card">HELLSTAR</div>
+<div class="card">BAPE</div>
+<div class="card">Denim Tears</div>
+<div class="card">Balenciaga</div>
+<div class="card">Lululemon</div>
+<div class="card">Maison Margiela</div>
+<div class="card">Rolex</div>
+<div class="card">Louis Vuitton</div>
+<div class="card">Gucci</div>
+<div class="card">Nike Tech</div>
+<div class="card">Gallery Dept</div>
+<div class="card">Amiri</div>
+<div class="card">Palm Angels</div>
+<div class="card">Moncler</div>
+<div class="card">AirPods</div>
 
 </div>
 
+<p class="mt-6">
+
+These brands sell quickly because people want designer style without paying retail.
+
+</p>
+
+</div>
 
 <!-- MARKETPLACE -->
+
 <div class="section">
 
-<h2 class="text-3xl font-bold mb-4">Vendor Marketplace</h2>
+<h2 class="text-3xl font-bold mb-6">Vendor Marketplace</h2>
 
 <p>
-Get access to trusted vendors, listing templates, and reselling guides.
+
+We spent months finding trusted vendors.
+
+Instead of searching yourself you can get:
+
+</p>
+
+<ul class="list-disc ml-6 mt-4">
+
+<li>Vendor contact list</li>
+<li>Full reselling guide</li>
+<li>Step-by-step selling methods</li>
+<li>Listing templates</li>
+<li>Product sourcing tips</li>
+
+</ul>
+
+<p class="mt-4">
+
+Single vendor access: $10-$50  
+Full vendor bundle: $250
+
 </p>
 
 </div>
-
 
 <!-- SELLING PLATFORMS -->
+
 <div class="section">
 
-<h2 class="text-3xl font-bold mb-4">Where To Sell</h2>
+<h2 class="text-3xl font-bold mb-6">Where To Sell</h2>
 
-<p>
-Depop • OfferUp • Facebook Marketplace
-</p>
-
-</div>
-
-
-<!-- FIRST SALE PLAN -->
-<div class="section">
-
-<h2 class="text-3xl font-bold mb-4">First Sale Plan</h2>
-
-<p>
-Day 1 – Get vendors  
-Day 7 – Buy items  
-Day 10 – List items  
-Day 20 – Make first sale
-</p>
-
-</div>
-
-
-<!-- FAQ -->
-<div class="section">
-
-<h2 class="text-3xl font-bold mb-4">FAQ</h2>
-
-<p>Do I need experience? No.</p>
-<p>How much to start? $35.</p>
-
-</div>
-
-
-<!-- TESTIMONIALS -->
-<div class="section">
-
-<h2 class="text-3xl font-bold mb-4">Testimonials</h2>
-
-<p>"Made $400 in 2 weeks!" – Jason</p>
-<p>"Vendor list works great!" – Kayla</p>
-
-</div>
-
-
-
-<!-- PRODUCTS -->
-<div id="products" class="section">
-
-<h2 class="text-3xl font-bold mb-4">Products</h2>
+<div class="grid md:grid-cols-3 gap-6">
 
 <div class="card">
 
-<h3 class="text-xl font-bold">Trading Course</h3>
+<h3 class="font-bold">Depop</h3>
+<p>Young buyers and easy listings</p>
 
-<p class="mb-2">
-Step-by-step guide teaching you how to start trading and making money.
+</div>
+
+<div class="card">
+
+<h3 class="font-bold">OfferUp</h3>
+<p>Local sales and quick flips</p>
+
+</div>
+
+<div class="card">
+
+<h3 class="font-bold">Facebook Marketplace</h3>
+<p>Huge buyer audience</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FIRST SALE PLAN -->
+
+<div class="section">
+
+<h2 class="text-3xl font-bold mb-6">First Sale Plan</h2>
+
+<ul class="list-disc ml-6">
+
+<li>Day 1 – Get vendor access</li>
+<li>Day 2-7 – Buy items</li>
+<li>Day 7-10 – Take photos</li>
+<li>Day 10-14 – List items</li>
+<li>Day 14-20 – Make your first sale</li>
+
+</ul>
+
+</div>
+
+<!-- TESTIMONIALS -->
+
+<div class="section">
+
+<h2 class="text-3xl font-bold mb-6">Testimonials</h2>
+
+<div class="card">Made my first $400 in 2 weeks – Jason T</div>
+<div class="card">Vendor list helped me find the best items instantly – Kayla S</div>
+<div class="card">Started with $35 and now make consistent profits – Malik R</div>
+
+</div>
+
+<!-- PRODUCT -->
+
+<div id="products" class="section">
+
+<h2 class="text-3xl font-bold mb-6">Course</h2>
+
+<div class="card">
+
+<h3 class="text-xl font-bold">Profit Plug Reselling Guide</h3>
+
+<p class="mt-2">
+
+Complete guide + vendor marketplace access.
+
 </p>
 
-<p class="text-sky-400 font-bold mb-2">$25</p>
+<p class="text-sky-400 font-bold mt-3">$25</p>
 
-<label>Quantity</label>
-
-<input id="qty" type="number" value="1" min="1" class="text-black p-1 w-16">
+<input id="qty" type="number" value="1" min="1" class="text-black w-16 p-1 mt-3">
 
 <br><br>
 
@@ -186,19 +309,18 @@ Step-by-step guide teaching you how to start trading and making money.
 
 </div>
 
-
 <script>
 
 function addToCart(){
 
-let quantity = document.getElementById("qty").value
+let qty=document.getElementById("qty").value
 
-let cart = JSON.parse(localStorage.getItem("cart")) || []
+let cart=JSON.parse(localStorage.getItem("cart"))||[]
 
 cart.push({
-name:"Trading Course",
+name:"Profit Plug Reselling Guide",
 price:25,
-qty:quantity
+qty:qty
 })
 
 localStorage.setItem("cart",JSON.stringify(cart))
@@ -208,7 +330,6 @@ window.location.href="cart.html"
 }
 
 </script>
-
 
 </body>
 </html>
