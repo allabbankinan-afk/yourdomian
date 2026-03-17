@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Success</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background:#0b3d91;color:white;text-align:center;padding-top:100px;">
+
+<h1 class="text-4xl">Payment Successful 🎉</h1>
+
+<br>
+
+<button onclick="go()">Access Course</button>
+
+<script>
+function go(){
+localStorage.setItem("paid","true")
+window.location.href="course.html"
+}
+</script>
+
+</body>
+</html>
