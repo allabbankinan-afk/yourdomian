@@ -19,7 +19,6 @@ overflow-x:hidden;
 }
 
 /* star background */
-
 .star{
 position:fixed;
 width:2px;
@@ -29,27 +28,42 @@ opacity:.5;
 border-radius:50%;
 }
 
+/* container */
 .container{
 max-width:1100px;
 margin:auto;
 padding:80px 20px;
 }
 
+/* cards */
 .card{
 background:rgba(255,255,255,0.05);
 padding:30px;
 border-radius:16px;
+transition:0.3s;
 cursor:pointer;
 }
 
+.card:hover{
+transform:translateY(-5px);
+background:rgba(255,255,255,0.08);
+}
+
+/* buttons */
 button{
 background:#38bdf8;
 color:black;
 padding:12px 24px;
 border-radius:30px;
 font-weight:bold;
+transition:0.3s;
 }
 
+button:hover{
+background:#0ea5e9;
+}
+
+/* navbar */
 .nav{
 display:flex;
 justify-content:space-between;
@@ -62,6 +76,24 @@ font-size:24px;
 font-weight:bold;
 }
 
+/* cart icon */
+.cart{
+position:relative;
+cursor:pointer;
+font-size:22px;
+}
+
+.cart-count{
+position:absolute;
+top:-6px;
+right:-10px;
+background:yellow;
+color:black;
+font-size:10px;
+padding:2px 5px;
+border-radius:50%;
+}
+
 </style>
 
 </head>
@@ -69,65 +101,36 @@ font-weight:bold;
 <body>
 
 <script>
-
 /* generate stars */
-
 for(let i=0;i<120;i++){
-
 let star=document.createElement("div")
 star.className="star"
-
 star.style.top=Math.random()*100+"%"
 star.style.left=Math.random()*100+"%"
-
 document.body.appendChild(star)
-
 }
-
 </script>
 
-
 <!-- NAVBAR -->
-
 <div class="nav">
 
-<div class="logo">
-Profit Plug
+<div class="logo">Profit Plug</div>
+
+<div>
+<a href="#course" class="mr-6">Course</a>
+<a href="#profits" class="mr-6">Profits</a>
+<a href="products.html" class="mr-6">Products</a>
+<a href="vendors.html" class="mr-6">Vendors</a>
 </div>
 
-<div style="display:flex; align-items:center; gap:20px;">
-
-<a href="#course">Course</a>
-<a href="#profits">Profits</a>
-<a href="#testimonials">Results</a>
-
-<!-- CART ICON -->
-<div style="position:relative; cursor:pointer;" onclick="goToCart()">
-
+<div class="cart" onclick="goToCart()">
 🛒
-
-<span id="cartCount" style="
-position:absolute;
-top:-8px;
-right:-10px;
-background:yellow;
-color:black;
-font-size:12px;
-padding:2px 6px;
-border-radius:50%;
-">
-0
-</span>
-
+<div id="cartCount" class="cart-count">0</div>
 </div>
 
 </div>
 
-</div>
-
-
-<!-- HERO SECTION -->
-
+<!-- HERO -->
 <div class="container text-center">
 
 <h1 class="text-5xl font-bold mb-6">
@@ -140,15 +143,11 @@ Profit Plug teaches you how to buy trending designer items for cheap
 and flip them online for massive profits.
 </p>
 
-<button onclick="addToCart()">
-Start Making Money
-</button>
+<button onclick="addToCart()">Start Making Money</button>
 
 </div>
 
-
-<!-- PROFIT EXAMPLES -->
-
+<!-- PROFITS -->
 <div id="profits" class="container">
 
 <h2 class="text-3xl font-bold mb-10 text-center">
@@ -157,21 +156,21 @@ Real Profit Examples
 
 <div class="grid md:grid-cols-3 gap-6">
 
-<div class="card text-center" onclick="openProduct('Chrome Hearts Hoodie',60)">
+<div class="card text-center" onclick="openModal('Chrome Hearts Hoodie',60)">
 <h3 class="font-bold mb-2">Chrome Hearts Hoodie</h3>
 <p>Buy: $60</p>
 <p>Sell: $320</p>
 <p class="text-sky-400 font-bold">Profit: $260</p>
 </div>
 
-<div class="card text-center" onclick="openProduct('BAPE Tee',40)">
+<div class="card text-center" onclick="openModal('BAPE Tee',40)">
 <h3 class="font-bold mb-2">BAPE Tee</h3>
 <p>Buy: $40</p>
 <p>Sell: $200</p>
 <p class="text-sky-400 font-bold">Profit: $160</p>
 </div>
 
-<div class="card text-center" onclick="openProduct('AirPods',50)">
+<div class="card text-center" onclick="openModal('AirPods',50)">
 <h3 class="font-bold mb-2">AirPods</h3>
 <p>Buy: $50</p>
 <p>Sell: $180</p>
@@ -182,114 +181,7 @@ Real Profit Examples
 
 </div>
 
-
-<!-- WHAT YOU GET -->
-
-<div class="container">
-
-<h2 class="text-3xl font-bold mb-10 text-center">
-What You'll Learn
-</h2>
-
-<div class="grid md:grid-cols-2 gap-8">
-
-<div class="card">
-✔ How to find trending designer brands  
-<br><br>
-✔ Where to buy items for cheap  
-<br><br>
-✔ How to list items for fast sales  
-<br><br>
-✔ How to scale your reselling business
-</div>
-
-<div class="card">
-✔ Step-by-step reselling guide  
-<br><br>
-✔ Beginner friendly lessons  
-<br><br>
-✔ Real profit strategies  
-<br><br>
-✔ Vendor marketplace access
-</div>
-
-</div>
-
-</div>
-
-
-<!-- TESTIMONIALS -->
-
-<div id="testimonials" class="container">
-
-<h2 class="text-3xl font-bold mb-10 text-center">
-Student Results
-</h2>
-
-<div class="grid md:grid-cols-3 gap-6">
-
-<div class="card">
-“Made $400 in my first 2 weeks.”  
-<br><br>
-— Jason T
-</div>
-
-<div class="card">
-“The vendor list helped me flip my first hoodie.”  
-<br><br>
-— Kayla S
-</div>
-
-<div class="card">
-“Started with $35 and now sell every week.”  
-<br><br>
-— Malik R
-</div>
-
-</div>
-
-</div>
-
-
-<!-- COURSE CARD -->
-
-<div id="course" class="container text-center">
-
-<div class="card max-w-xl mx-auto">
-
-<h2 class="text-3xl font-bold mb-4">
-Profit Plug Course
-</h2>
-
-<p class="mb-4">
-Complete step-by-step guide to flipping designer clothing for profit.
-</p>
-
-<p class="text-sky-400 text-2xl font-bold">
-$25
-</p>
-
-<br>
-
-<button onclick="addToCart()">
-Buy Course
-</button>
-
-<br><br>
-
-<a href="course.html">
-<button>
-Access Course
-</button>
-</a>
-
-</div>
-
-</div>
-
-
-<!-- PRODUCT MODAL -->
-
+<!-- MODAL -->
 <div id="productModal" style="
 display:none;
 position:fixed;
@@ -302,90 +194,121 @@ justify-content:center;
 align-items:center;
 ">
 
-<div style="
-background:#111827;
-padding:30px;
-border-radius:15px;
-text-align:center;
-width:300px;
-">
+<div style="background:#111827;padding:30px;border-radius:15px;text-align:center;width:320px;">
 
 <h2 id="productName" class="text-xl font-bold mb-4"></h2>
+<p id="productPrice" class="mb-4"></p>
 
-<p id="productPrice" class="mb-6"></p>
+<input id="qty" type="number" value="1" min="1"
+style="width:60px;padding:5px;color:black;margin-bottom:15px;">
 
-<button onclick="addProductToCart()">
-Add to Cart
-</button>
+<br>
+
+<button onclick="addProductToCart()">Add to Cart</button>
 
 <br><br>
 
-<button onclick="closeModal()" style="background:gray;">
-Close
-</button>
+<p id="addedMsg" style="color:lime; display:none;">Added ✔</p>
+
+<br>
+
+<button onclick="closeModal()" style="background:gray;">Close</button>
 
 </div>
 
 </div>
 
+<!-- COURSE -->
+<div id="course" class="container text-center">
+
+<div class="card max-w-xl mx-auto">
+
+<h2 class="text-3xl font-bold mb-4">
+Profit Plug Course
+</h2>
+
+<p class="mb-4">
+Complete step-by-step guide to flipping designer clothing
+for profit.
+</p>
+
+<p class="text-sky-400 text-2xl font-bold">
+$25
+</p>
+
+<br>
+
+<button onclick="addToCart()">Buy Course</button>
+
+<br><br>
+
+<a href="course.html">
+<button>Access Course</button>
+</a>
+
+</div>
+
+</div>
 
 <!-- FOOTER -->
-
 <div class="text-center pb-10 text-gray-400">
 Profit Plug © 2026
 </div>
 
-
 <script>
 
-let selectedProduct = {}
 let cart = JSON.parse(localStorage.getItem("cart")) || []
-
-function openProduct(name, price){
-selectedProduct = {name, price}
-document.getElementById("productName").innerText = name
-document.getElementById("productPrice").innerText = "$" + price
-document.getElementById("productModal").style.display = "flex"
-}
-
-function closeModal(){
-document.getElementById("productModal").style.display = "none"
-}
-
-function addProductToCart(){
-cart.push({
-name:selectedProduct.name,
-price:selectedProduct.price,
-qty:1
-})
-localStorage.setItem("cart", JSON.stringify(cart))
-updateCartCount()
-closeModal()
-}
+let selectedProduct = null
 
 function updateCartCount(){
 document.getElementById("cartCount").innerText = cart.length
 }
+
+updateCartCount()
 
 function goToCart(){
 window.location.href="cart.html"
 }
 
 function addToCart(){
-
-cart.push({
-name:"Profit Plug Course",
-price:25,
-qty:1
-})
-
+cart.push({name:"Profit Plug Course",price:25,qty:1})
 localStorage.setItem("cart",JSON.stringify(cart))
-
+updateCartCount()
 window.location.href="cart.html"
-
 }
 
+function openModal(name,price){
+selectedProduct={name,price}
+document.getElementById("productName").innerText=name
+document.getElementById("productPrice").innerText="$"+price
+document.getElementById("productModal").style.display="flex"
+}
+
+function closeModal(){
+document.getElementById("productModal").style.display="none"
+}
+
+function addProductToCart(){
+
+let quantity = document.getElementById("qty").value
+
+cart.push({
+name:selectedProduct.name,
+price:selectedProduct.price,
+qty:Number(quantity)
+})
+
+localStorage.setItem("cart", JSON.stringify(cart))
+
 updateCartCount()
+
+document.getElementById("addedMsg").style.display="block"
+
+setTimeout(()=>{
+document.getElementById("addedMsg").style.display="none"
+},1500)
+
+}
 
 </script>
 
