@@ -1,115 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Profit Plug</title>
-
 <script src="https://cdn.tailwindcss.com"></script>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
 <style>
-body{
-background:linear-gradient(180deg,#0b3d91,#111827);
-color:white;
-font-family:'Poppins',sans-serif;
-overflow-x:hidden;
-}
-
-.star{
-position:fixed;
-width:2px;
-height:2px;
-background:white;
-opacity:.5;
-border-radius:50%;
-}
-
-.nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-background:rgba(0,0,0,0.3);
-backdrop-filter:blur(10px);
-border-bottom:1px solid rgba(255,255,255,0.05);
-}
-
+body{background:linear-gradient(180deg,#0b3d91,#111827);color:white;font-family:sans-serif;overflow-x:hidden;}
+.star{position:fixed;width:2px;height:2px;background:white;opacity:.5;border-radius:50%;}
+.container{max-width:1100px;margin:auto;padding:80px 20px;}
+.card{background:rgba(255,255,255,0.05);padding:30px;border-radius:16px;}
+button{background:#38bdf8;color:black;padding:12px 24px;border-radius:30px;font-weight:bold;cursor:pointer;}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;}
 .logo{font-size:24px;font-weight:bold;}
-
-.cart{
-position:relative;
-cursor:pointer;
-font-size:22px;
-}
-
-.cart-count{
-position:absolute;
-top:-6px;
-right:-10px;
-background:yellow;
-color:black;
-font-size:10px;
-padding:2px 5px;
-border-radius:50%;
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:80px 20px;
-border-bottom:1px solid rgba(255,255,255,0.05);
-}
-
-.card{
-background:rgba(255,255,255,0.05);
-padding:30px;
-border-radius:16px;
-transition:0.3s;
-cursor:pointer;
-border:1px solid rgba(255,255,255,0.08);
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
-backdrop-filter:blur(10px);
-}
-
-.card:hover{
-transform:translateY(-6px);
-background:rgba(255,255,255,0.08);
-}
-
-button{
-background:#38bdf8;
-color:black;
-padding:12px 24px;
-border-radius:30px;
-font-weight:bold;
-transition:0.3s;
-box-shadow:0 0 15px rgba(56,189,248,0.6);
-}
-
-button:hover{
-background:#0ea5e9;
-}
-
-.fade-in{
-opacity:0;
-transform:translateY(20px);
-animation:fadeIn 1s ease forwards;
-}
-
-@keyframes fadeIn{
-to{opacity:1;transform:translateY(0);}
-}
 </style>
-
 </head>
-
 <body>
-
 <script>
+// generate stars
 for(let i=0;i<120;i++){
 let star=document.createElement("div")
 star.className="star"
@@ -119,153 +27,143 @@ document.body.appendChild(star)
 }
 </script>
 
-<!-- NAV -->
+<!-- TOP TRUST STRIP -->
+<div style="background:black;color:white;text-align:center;padding:6px;font-size:12px;">
+🔥 1,247+ students • Proven reselling system • Instant access
+</div>
+
+<!-- NAVBAR -->
 <div class="nav">
 <div class="logo">Profit Plug</div>
-
 <div>
 <a href="#course" class="mr-6">Course</a>
 <a href="#profits" class="mr-6">Profits</a>
-<a href="products.html" class="mr-6">Products</a>
-<a href="vendors.html" class="mr-6">Vendors</a>
-</div>
-
-<div class="cart" onclick="goToCart()">
-🛒
-<div id="cartCount" class="cart-count">0</div>
+<a href="#testimonials">Results</a>
 </div>
 </div>
 
-<!-- HERO -->
-<div class="container text-center fade-in">
+<!-- CART ICON -->
+<div style="position:fixed;top:20px;right:20px;cursor:pointer;" onclick="window.location.href='cart.html'">
+<img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png"/>
+<span id="cart-count" style="position:absolute;top:-5px;right:-5px;background:yellow;color:black;border-radius:50%;padding:2px 5px;font-size:10px;">0</span>
+</div>
 
-<h1 class="text-5xl font-bold mb-6">
-Learn How To Make Money Reselling Designer Clothes
-</h1>
-
-<p class="text-xl mb-6">
-Buy low, sell high, and turn it into real cash.
+<!-- HERO SECTION -->
+<div class="container text-center">
+<h1 class="text-5xl font-bold mb-6">Learn How To Make Money Reselling Designer Clothes</h1>
+<p class="text-xl mb-8 max-w-2xl mx-auto">
+Profit Plug teaches you how to buy trending designer items for cheap and flip them online for massive profits.
 </p>
-
-<p style="color:lime;">✔ Instant Access ✔ Beginner Friendly</p>
-<p style="color:orange;">⚠️ Limited spots available</p>
-
 <button onclick="addToCart()">Start Making Money</button>
-
-<p id="timer" style="color:orange;margin-top:15px;"></p>
-
 </div>
 
-<!-- PROFITS -->
-<div id="profits" class="container fade-in">
+<!-- FEATURED IN -->
+<div class="container text-center mt-6">
+<p class="text-gray-400 mb-4">As seen on</p>
+<div style="display:flex;justify-content:center;gap:30px;opacity:0.7;">
+<span>Depop</span>
+<span>eBay</span>
+<span>OfferUp</span>
+<span>Facebook Marketplace</span>
+</div>
+</div>
 
-<h2 class="text-3xl text-center mb-10">Profit Examples</h2>
-
+<!-- PROFIT EXAMPLES -->
+<div id="profits" class="container">
+<h2 class="text-3xl font-bold mb-10 text-center">Real Profit Examples</h2>
 <div class="grid md:grid-cols-3 gap-6">
-
-<div class="card text-center" onclick="openModal('Chrome Hearts Hoodie',60)">
-<h3>Chrome Hearts Hoodie</h3>
-<p>$60 → $320</p>
+<div class="card text-center cursor-pointer" onclick="showProductPopup('Chrome Hearts Hoodie',60)">
+<h3 class="font-bold mb-2">Chrome Hearts Hoodie</h3>
+<p>Buy: $60</p>
+<p>Sell: $320</p>
+<p class="text-sky-400 font-bold">Profit: $260</p>
 </div>
-
-<div class="card text-center" onclick="openModal('BAPE Tee',40)">
-<h3>BAPE Tee</h3>
-<p>$40 → $200</p>
+<div class="card text-center cursor-pointer" onclick="showProductPopup('BAPE Tee',40)">
+<h3 class="font-bold mb-2">BAPE Tee</h3>
+<p>Buy: $40</p>
+<p>Sell: $200</p>
+<p class="text-sky-400 font-bold">Profit: $160</p>
 </div>
-
-<div class="card text-center" onclick="openModal('AirPods',50)">
-<h3>AirPods</h3>
-<p>$50 → $180</p>
+<div class="card text-center cursor-pointer" onclick="showProductPopup('AirPods',50)">
+<h3 class="font-bold mb-2">AirPods</h3>
+<p>Buy: $50</p>
+<p>Sell: $180</p>
+<p class="text-sky-400 font-bold">Profit: $130</p>
 </div>
-
-</div>
-</div>
-
-<!-- MODAL -->
-<div id="productModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;">
-<div style="background:#111827;padding:30px;border-radius:15px;text-align:center;width:320px;">
-<h2 id="productName"></h2>
-<p id="productPrice"></p>
-
-<input id="qty" type="number" value="1" min="1" style="color:black">
-
-<br><br>
-<button onclick="addProductToCart()">Add to Cart</button>
-<br><br>
-<button onclick="closeModal()">Close</button>
 </div>
 </div>
 
-<!-- COURSE -->
-<div id="course" class="container text-center fade-in">
+<!-- WHAT YOU GET -->
+<div class="container">
+<h2 class="text-3xl font-bold mb-10 text-center">What You'll Learn</h2>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="card">
+✔ How to find trending designer brands  <br><br>
+✔ Where to buy items for cheap  <br><br>
+✔ How to list items for fast sales  <br><br>
+✔ How to scale your reselling business
+</div>
+<div class="card">
+✔ Step-by-step reselling guide  <br><br>
+✔ Beginner friendly lessons  <br><br>
+✔ Real profit strategies  <br><br>
+✔ Vendor marketplace access
+</div>
+</div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div id="testimonials" class="container">
+<h2 class="text-3xl font-bold mb-10 text-center">Student Results</h2>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="card">“Made $400 in my first 2 weeks.”  <br><br>— Jason T</div>
+<div class="card">“The vendor list helped me flip my first hoodie.”  <br><br>— Kayla S</div>
+<div class="card">“Started with $35 and now sell every week.”  <br><br>— Malik R</div>
+</div>
+</div>
+
+<!-- COURSE CARD -->
+<div id="course" class="container text-center">
 <div class="card max-w-xl mx-auto">
-<h2 class="text-3xl mb-4">Profit Plug Course</h2>
-<p>$25</p>
+<h2 class="text-3xl font-bold mb-4">Profit Plug Course</h2>
+<p class="mb-4">Complete step-by-step guide to flipping designer clothing for profit.</p>
+<p class="text-sky-400 text-2xl font-bold">$25</p>
 <br>
-<button onclick="addToCart()">Buy Course</button>
+<button onclick="showProductPopup('Profit Plug Trading Course',25)">Buy Course</button>
+<br><br>
+<a href="course.html"><button>Access Course</button></a>
 </div>
 </div>
 
-<!-- POPUP -->
-<div id="popup" style="position:fixed;bottom:20px;left:20px;background:#111827;padding:15px;border-radius:10px;display:none;"></div>
+<!-- CTA STRIP -->
+<div style="background:#38bdf8;color:black;text-align:center;padding:40px;margin-top:40px;">
+<h2 class="text-3xl font-bold mb-4">Start Making Money Today</h2>
+<p class="mb-6">Join hundreds of resellers already profiting</p>
+<button onclick="addToCart()">Get Started Now</button>
+</div>
+
+<!-- FOOTER -->
+<div class="text-center pb-10 text-gray-400">Profit Plug © 2026</div>
 
 <script>
-
-let cart = JSON.parse(localStorage.getItem("cart")) || []
-let selectedProduct = null
-
-function updateCartCount(){
-document.getElementById("cartCount").innerText = cart.length
+function showProductPopup(name,price){
+  let qty = prompt(`${name}\nPrice: $${price}\n\nEnter quantity:`,'1');
+  if(qty && !isNaN(qty)){
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    cart.push({name:name, price:price, qty:parseInt(qty)});
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`${qty} ${name} added to cart`);
+    updateCartCount();
+  }
 }
-updateCartCount()
-
-function goToCart(){window.location.href="cart.html"}
-
 function addToCart(){
-cart.push({name:"Course",price:25,qty:1})
-localStorage.setItem("cart",JSON.stringify(cart))
-window.location.href="cart.html"
+  showProductPopup('Profit Plug Trading Course',25);
 }
-
-function openModal(name,price){
-selectedProduct={name,price}
-document.getElementById("productName").innerText=name
-document.getElementById("productPrice").innerText="$"+price
-document.getElementById("productModal").style.display="flex"
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  document.getElementById("cart-count").textContent = cart.length;
 }
-
-function closeModal(){
-document.getElementById("productModal").style.display="none"
-}
-
-function addProductToCart(){
-let qty=document.getElementById("qty").value
-cart.push({name:selectedProduct.name,price:selectedProduct.price,qty:Number(qty)})
-localStorage.setItem("cart",JSON.stringify(cart))
-closeModal()
-updateCartCount()
-}
-
-/* TIMER */
-let time=600
-setInterval(()=>{
-let m=Math.floor(time/60)
-let s=time%60
-document.getElementById("timer").innerText="⚠️ Price increases in "+m+":"+(s<10?"0":"")+s
-time--
-if(time<0) time=600
-},1000)
-
-/* FAKE SALES */
-let names=["Mike","Sarah","Jason","Alex"]
-setInterval(()=>{
-let popup=document.getElementById("popup")
-popup.innerText=names[Math.floor(Math.random()*names.length)]+" just bought the course"
-popup.style.display="block"
-setTimeout(()=>popup.style.display="none",3000)
-},7000)
-
+updateCartCount();
 </script>
-
 </body>
 </html>
