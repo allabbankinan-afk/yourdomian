@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Vendors - Profit Plug</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+background:linear-gradient(180deg,#0b3d91,#111827);
+color:white;
+font-family:sans-serif;
+}
+.card{
+background:rgba(255,255,255,0.05);
+padding:25px;
+border-radius:15px;
+text-align:center;
+}
+</style>
+
+</head>
+
+<body class="p-10">
+
+<h1 class="text-4xl mb-10 text-center">Vendor Access</h1>
+
+<div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+<div class="card">
+<h2 class="text-2xl">Single Vendor</h2>
+<p>$25</p>
+<button onclick="buyVendor(25)" class="mt-4">Buy</button>
+</div>
+
+<div class="card">
+<h2 class="text-2xl">Full Vendor Bundle</h2>
+<p>$250</p>
+<button onclick="buyVendor(250)" class="mt-4">Buy</button>
+</div>
+
+</div>
+
+<script>
+
+function buyVendor(price){
+
+let cart=[]
+
+cart.push({
+name:"Vendor Access",
+price:price,
+qty:1
+})
+
+localStorage.setItem("cart",JSON.stringify(cart))
+
+window.location.href="cart.html"
+
+}
+
+</script>
+
+</body>
+</html>
