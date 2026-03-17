@@ -3,59 +3,152 @@
 <head>
 
 <title>Products - Profit Plug</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
+
 body{
 background:linear-gradient(180deg,#0b3d91,#111827);
 color:white;
-font-family:sans-serif;
+font-family:'Poppins',sans-serif;
 }
+
+.nav{
+display:flex;
+justify-content:space-between;
+padding:20px 40px;
+background:rgba(0,0,0,0.3);
+backdrop-filter:blur(10px);
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:80px 20px;
+}
+
 .card{
 background:rgba(255,255,255,0.05);
 padding:25px;
-border-radius:15px;
-text-align:center;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+transition:0.3s;
+position:relative;
 }
+
+.card:hover{
+transform:translateY(-8px);
+background:rgba(255,255,255,0.08);
+}
+
+.badge{
+position:absolute;
+top:10px;
+left:10px;
+background:gold;
+color:black;
+padding:3px 8px;
+border-radius:10px;
+font-size:12px;
+}
+
+button{
+background:#38bdf8;
+color:black;
+padding:10px 20px;
+border-radius:20px;
+font-weight:bold;
+box-shadow:0 0 15px rgba(56,189,248,0.6);
+}
+
+button:hover{
+background:#0ea5e9;
+}
+
 </style>
 
 </head>
 
-<body class="p-10">
+<body>
 
-<h1 class="text-4xl mb-10 text-center">Products</h1>
+<!-- NAV -->
+<div class="nav">
+<div>Profit Plug</div>
 
-<div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+<div>
+<a href="index.html">Home</a>
+<a href="products.html" class="ml-6">Products</a>
+<a href="vendors.html" class="ml-6">Vendors</a>
+</div>
+</div>
 
-<div class="card">
-<h2 class="text-2xl mb-4">Profit Plug Course</h2>
-<p>Full reselling guide + strategies</p>
-<p class="text-sky-400 text-xl mt-2">$25</p>
+<div class="container">
 
-<button onclick="buyCourse()" class="mt-4">
-Buy Now
-</button>
+<h1 class="text-4xl text-center mb-6 font-bold">
+Products
+</h1>
+
+<p class="text-center text-gray-300 mb-4">
+✔ Trusted by beginner resellers
+</p>
+
+<p class="text-center text-orange-400 mb-10">
+⚠️ Limited spots available
+</p>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="card text-center">
+<div class="badge">BEST SELLER</div>
+<h2 class="text-xl font-bold mb-2">Reselling Course</h2>
+<p>$25</p>
+<p class="text-gray-300 mb-4">Step-by-step beginner system</p>
+<button onclick="addToCart('Course',25)">Add to Cart</button>
+</div>
+
+<div class="card text-center">
+<h2 class="text-xl font-bold mb-2">Vendor Bundle</h2>
+<p>$250</p>
+<p class="text-gray-300 mb-4">Full supplier access</p>
+<button onclick="addToCart('Vendor Bundle',250)">Add to Cart</button>
+</div>
+
+<div class="card text-center">
+<h2 class="text-xl font-bold mb-2">Single Vendor</h2>
+<p>$50</p>
+<p class="text-gray-300 mb-4">One verified supplier</p>
+<button onclick="addToCart('Single Vendor',50)">Add to Cart</button>
 </div>
 
 </div>
+
+</div>
+
+<!-- POPUP -->
+<div id="popup" style="position:fixed;bottom:20px;left:20px;background:#111827;padding:15px;border-radius:10px;display:none;"></div>
 
 <script>
 
-function buyCourse(){
-
-let cart=[]
-
-cart.push({
-name:"Profit Plug Course",
-price:25,
-qty:1
-})
-
-localStorage.setItem("cart",JSON.stringify(cart))
-
-window.location.href="cart.html"
-
+/* CART */
+function addToCart(name,price){
+let cart = JSON.parse(localStorage.getItem("cart")) || []
+cart.push({name,price,qty:1})
+localStorage.setItem("cart", JSON.stringify(cart))
+alert("Added to cart ✔")
 }
+
+/* FAKE SALES */
+let names=["Mike","Sarah","Jason","Alex"]
+setInterval(()=>{
+let popup=document.getElementById("popup")
+popup.innerText=names[Math.floor(Math.random()*names.length)]+" just bought this"
+popup.style.display="block"
+setTimeout(()=>popup.style.display="none",3000)
+},7000)
 
 </script>
 
