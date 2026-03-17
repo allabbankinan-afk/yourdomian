@@ -6,164 +6,185 @@
 <title>Profit Plug</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-body{background:linear-gradient(180deg,#0b3d91,#111827);color:white;font-family:sans-serif;overflow-x:hidden;}
-.star{position:fixed;width:2px;height:2px;background:white;opacity:.5;border-radius:50%;}
-.container{max-width:1100px;margin:auto;padding:80px 20px;}
-.card{background:rgba(255,255,255,0.05);padding:30px;border-radius:16px;}
-button{background:#38bdf8;color:black;padding:12px 24px;border-radius:30px;font-weight:bold;cursor:pointer;}
-.nav{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;}
-.logo{font-size:24px;font-weight:bold;}
+body {
+  background: linear-gradient(180deg, #0b3d91, #111827);
+  color: white;
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+/* star background */
+.star {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: white;
+  opacity: .5;
+  border-radius: 50%;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 80px 20px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 16px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+button {
+  background: #38bdf8;
+  color: black;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+button:hover {
+  transform: scale(1.05);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.cart-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: yellow;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 5px;
+}
 </style>
 </head>
 <body>
 <script>
-// generate stars
+/* generate stars */
 for(let i=0;i<120;i++){
-let star=document.createElement("div")
-star.className="star"
-star.style.top=Math.random()*100+"%"
-star.style.left=Math.random()*100+"%"
-document.body.appendChild(star)
+  let star=document.createElement("div")
+  star.className="star"
+  star.style.top=Math.random()*100+"%"
+  star.style.left=Math.random()*100+"%"
+  document.body.appendChild(star)
 }
-</script>
 
-<!-- TOP TRUST STRIP -->
-<div style="background:black;color:white;text-align:center;padding:6px;font-size:12px;">
-🔥 1,247+ students • Proven reselling system • Instant access
-</div>
+/* update cart count */
+function updateCartCount(){
+  let cart=JSON.parse(localStorage.getItem("cart")||"[]");
+  let count=document.getElementById("cartCount");
+  if(count) count.innerText=cart.length;
+}
+updateCartCount();
+</script>
 
 <!-- NAVBAR -->
 <div class="nav">
-<div class="logo">Profit Plug</div>
-<div>
-<a href="#course" class="mr-6">Course</a>
-<a href="#profits" class="mr-6">Profits</a>
-<a href="#testimonials">Results</a>
-</div>
-</div>
-
-<!-- CART ICON -->
-<div style="position:fixed;top:20px;right:20px;cursor:pointer;" onclick="window.location.href='cart.html'">
-<img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png"/>
-<span id="cart-count" style="position:absolute;top:-5px;right:-5px;background:yellow;color:black;border-radius:50%;padding:2px 5px;font-size:10px;">0</span>
+  <div class="logo">Profit Plug</div>
+  <div>
+    <a href="#profits" class="mr-6">View Products</a>
+    <a href="#testimonials" class="mr-6">Results</a>
+    <span class="cart-icon" onclick="location.href='cart.html'">
+      🛒 <span class="cart-count" id="cartCount">0</span>
+    </span>
+  </div>
 </div>
 
 <!-- HERO SECTION -->
 <div class="container text-center">
 <h1 class="text-5xl font-bold mb-6">Learn How To Make Money Reselling Designer Clothes</h1>
-<p class="text-xl mb-8 max-w-2xl mx-auto">
-Profit Plug teaches you how to buy trending designer items for cheap and flip them online for massive profits.
-</p>
-<button onclick="addToCart()">Start Making Money</button>
-</div>
-
-<!-- FEATURED IN -->
-<div class="container text-center mt-6">
-<p class="text-gray-400 mb-4">As seen on</p>
-<div style="display:flex;justify-content:center;gap:30px;opacity:0.7;">
-<span>Depop</span>
-<span>eBay</span>
-<span>OfferUp</span>
-<span>Facebook Marketplace</span>
-</div>
+<p class="text-xl mb-8 max-w-2xl mx-auto">Profit Plug teaches you how to buy trending designer items for cheap and flip them online for massive profits.</p>
+<a href="products.html"><button>Start Learning</button></a>
 </div>
 
 <!-- PROFIT EXAMPLES -->
 <div id="profits" class="container">
 <h2 class="text-3xl font-bold mb-10 text-center">Real Profit Examples</h2>
 <div class="grid md:grid-cols-3 gap-6">
-<div class="card text-center cursor-pointer" onclick="showProductPopup('Chrome Hearts Hoodie',60)">
-<h3 class="font-bold mb-2">Chrome Hearts Hoodie</h3>
-<p>Buy: $60</p>
-<p>Sell: $320</p>
-<p class="text-sky-400 font-bold">Profit: $260</p>
-</div>
-<div class="card text-center cursor-pointer" onclick="showProductPopup('BAPE Tee',40)">
-<h3 class="font-bold mb-2">BAPE Tee</h3>
-<p>Buy: $40</p>
-<p>Sell: $200</p>
-<p class="text-sky-400 font-bold">Profit: $160</p>
-</div>
-<div class="card text-center cursor-pointer" onclick="showProductPopup('AirPods',50)">
-<h3 class="font-bold mb-2">AirPods</h3>
-<p>Buy: $50</p>
-<p>Sell: $180</p>
-<p class="text-sky-400 font-bold">Profit: $130</p>
-</div>
-</div>
-</div>
-
-<!-- WHAT YOU GET -->
-<div class="container">
-<h2 class="text-3xl font-bold mb-10 text-center">What You'll Learn</h2>
-<div class="grid md:grid-cols-2 gap-8">
-<div class="card">
-✔ How to find trending designer brands  <br><br>
-✔ Where to buy items for cheap  <br><br>
-✔ How to list items for fast sales  <br><br>
-✔ How to scale your reselling business
-</div>
-<div class="card">
-✔ Step-by-step reselling guide  <br><br>
-✔ Beginner friendly lessons  <br><br>
-✔ Real profit strategies  <br><br>
-✔ Vendor marketplace access
-</div>
+  <div class="card text-center" onclick="openProductModal('Chrome Hearts Hoodie',60)">
+    <h3 class="font-bold mb-2">Chrome Hearts Hoodie</h3>
+    <p>Buy: $60</p>
+    <p>Sell: $320</p>
+    <p class="text-sky-400 font-bold">Profit: $260</p>
+  </div>
+  <div class="card text-center" onclick="openProductModal('BAPE Tee',40)">
+    <h3 class="font-bold mb-2">BAPE Tee</h3>
+    <p>Buy: $40</p>
+    <p>Sell: $200</p>
+    <p class="text-sky-400 font-bold">Profit: $160</p>
+  </div>
+  <div class="card text-center" onclick="openProductModal('AirPods',50)">
+    <h3 class="font-bold mb-2">AirPods</h3>
+    <p>Buy: $50</p>
+    <p>Sell: $180</p>
+    <p class="text-sky-400 font-bold">Profit: $130</p>
+  </div>
 </div>
 </div>
 
-<!-- TESTIMONIALS -->
-<div id="testimonials" class="container">
-<h2 class="text-3xl font-bold mb-10 text-center">Student Results</h2>
-<div class="grid md:grid-cols-3 gap-6">
-<div class="card">“Made $400 in my first 2 weeks.”  <br><br>— Jason T</div>
-<div class="card">“The vendor list helped me flip my first hoodie.”  <br><br>— Kayla S</div>
-<div class="card">“Started with $35 and now sell every week.”  <br><br>— Malik R</div>
-</div>
-</div>
-
-<!-- COURSE CARD -->
-<div id="course" class="container text-center">
-<div class="card max-w-xl mx-auto">
-<h2 class="text-3xl font-bold mb-4">Profit Plug Course</h2>
-<p class="mb-4">Complete step-by-step guide to flipping designer clothing for profit.</p>
-<p class="text-sky-400 text-2xl font-bold">$25</p>
-<br>
-<button onclick="showProductPopup('Profit Plug Trading Course',25)">Buy Course</button>
-<br><br>
-<a href="course.html"><button>Access Course</button></a>
-</div>
+<!-- PRODUCT MODAL -->
+<div id="productModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden">
+  <div class="bg-gray-900 p-8 rounded-xl max-w-md w-full relative">
+    <span class="absolute top-3 right-5 cursor-pointer text-2xl" onclick="closeProductModal()">×</span>
+    <h2 class="text-2xl font-bold mb-4" id="modalTitle"></h2>
+    <p class="mb-4">Price: $<span id="modalPrice"></span></p>
+    <label for="qty">Quantity:</label>
+    <input type="number" id="modalQty" value="1" min="1" class="text-black rounded px-2 py-1 w-16 mb-4">
+    <br>
+    <button onclick="addToCartModal()">Add to Cart</button>
+  </div>
 </div>
 
-<!-- CTA STRIP -->
-<div style="background:#38bdf8;color:black;text-align:center;padding:40px;margin-top:40px;">
-<h2 class="text-3xl font-bold mb-4">Start Making Money Today</h2>
-<p class="mb-6">Join hundreds of resellers already profiting</p>
-<button onclick="addToCart()">Get Started Now</button>
-</div>
+<script>
+function openProductModal(name,price){
+  document.getElementById('modalTitle').innerText=name;
+  document.getElementById('modalPrice').innerText=price;
+  document.getElementById('modalQty').value=1;
+  document.getElementById('productModal').classList.remove('hidden');
+}
+function closeProductModal(){
+  document.getElementById('productModal').classList.add('hidden');
+}
+function addToCartModal(){
+  let name=document.getElementById('modalTitle').innerText;
+  let price=parseFloat(document.getElementById('modalPrice').innerText);
+  let qty=parseInt(document.getElementById('modalQty').value);
+  let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+  cart.push({name,price,qty});
+  localStorage.setItem('cart',JSON.stringify(cart));
+  updateCartCount();
+  closeProductModal();
+  alert('Added to cart!');
+}
+</script>
 
 <!-- FOOTER -->
 <div class="text-center pb-10 text-gray-400">Profit Plug © 2026</div>
-
-<script>
-function showProductPopup(name,price){
-  let qty = prompt(`${name}\nPrice: $${price}\n\nEnter quantity:`,'1');
-  if(qty && !isNaN(qty)){
-    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    cart.push({name:name, price:price, qty:parseInt(qty)});
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert(`${qty} ${name} added to cart`);
-    updateCartCount();
-  }
-}
-function addToCart(){
-  showProductPopup('Profit Plug Trading Course',25);
-}
-function updateCartCount(){
-  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
-  document.getElementById("cart-count").textContent = cart.length;
-}
-updateCartCount();
-</script>
 </body>
 </html>
