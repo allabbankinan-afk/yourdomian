@@ -20,6 +20,7 @@ button:hover{background:#0ea5e9;color:white;}
 .modal h3{font-size:24px;margin-bottom:10px;}
 .modal p{margin-bottom:15px;}
 .close-modal{position:absolute;top:10px;right:15px;cursor:pointer;font-weight:bold;font-size:18px;color:#38bdf8;}
+.cursor-pointer{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -46,6 +47,8 @@ document.body.appendChild(star)
 <a href="#course" class="mr-6">Course</a>
 <a href="#profits" class="mr-6">Profits</a>
 <a href="#testimonials">Results</a>
+<a href="#products-section" class="ml-6">Products</a>
+<a href="#vendors-section" class="ml-6">Vendors</a>
 </div>
 </div>
 
@@ -96,6 +99,30 @@ Profit Plug teaches you how to buy trending designer items for cheap and flip th
 <p>Buy: $50</p>
 <p>Sell: $180</p>
 <p class="text-sky-400 font-bold">Profit: $130</p>
+</div>
+</div>
+</div>
+
+<!-- PRODUCTS SECTION -->
+<div id="products-section" class="container mt-12">
+<h2 class="text-3xl font-bold mb-10 text-center">Explore Products</h2>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="card text-center cursor-pointer" onclick="window.location.href='products.html'">
+<h3 class="font-bold mb-2">Full Product Catalog</h3>
+<p class="text-gray-300 mb-4">View all available courses and vendor bundles</p>
+<button>Go to Products</button>
+</div>
+</div>
+</div>
+
+<!-- VENDORS SECTION -->
+<div id="vendors-section" class="container mt-12">
+<h2 class="text-3xl font-bold mb-10 text-center">Explore Vendors</h2>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="card text-center cursor-pointer" onclick="window.location.href='vendors.html'">
+<h3 class="font-bold mb-2">Vendor Marketplace</h3>
+<p class="text-gray-300 mb-4">Access verified reselling vendors and bundles</p>
+<button>Go to Vendors</button>
 </div>
 </div>
 </div>
