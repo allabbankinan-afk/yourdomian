@@ -9,16 +9,16 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
+<style>
 body{
 background:linear-gradient(180deg,#0b3d91,#111827);
 color:white;
-font-family:sans-serif;
+font-family:'Poppins',sans-serif;
 overflow-x:hidden;
 }
 
-/* star background */
 .star{
 position:fixed;
 width:2px;
@@ -28,55 +28,18 @@ opacity:.5;
 border-radius:50%;
 }
 
-/* container */
-.container{
-max-width:1100px;
-margin:auto;
-padding:80px 20px;
-}
-
-/* cards */
-.card{
-background:rgba(255,255,255,0.05);
-padding:30px;
-border-radius:16px;
-transition:0.3s;
-cursor:pointer;
-}
-
-.card:hover{
-transform:translateY(-5px);
-background:rgba(255,255,255,0.08);
-}
-
-/* buttons */
-button{
-background:#38bdf8;
-color:black;
-padding:12px 24px;
-border-radius:30px;
-font-weight:bold;
-transition:0.3s;
-}
-
-button:hover{
-background:#0ea5e9;
-}
-
-/* navbar */
 .nav{
 display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px 40px;
+background:rgba(0,0,0,0.3);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
-.logo{
-font-size:24px;
-font-weight:bold;
-}
+.logo{font-size:24px;font-weight:bold;}
 
-/* cart icon */
 .cart{
 position:relative;
 cursor:pointer;
@@ -94,6 +57,52 @@ padding:2px 5px;
 border-radius:50%;
 }
 
+.container{
+max-width:1100px;
+margin:auto;
+padding:80px 20px;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+padding:30px;
+border-radius:16px;
+transition:0.3s;
+cursor:pointer;
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+backdrop-filter:blur(10px);
+}
+
+.card:hover{
+transform:translateY(-6px);
+background:rgba(255,255,255,0.08);
+}
+
+button{
+background:#38bdf8;
+color:black;
+padding:12px 24px;
+border-radius:30px;
+font-weight:bold;
+transition:0.3s;
+box-shadow:0 0 15px rgba(56,189,248,0.6);
+}
+
+button:hover{
+background:#0ea5e9;
+}
+
+.fade-in{
+opacity:0;
+transform:translateY(20px);
+animation:fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn{
+to{opacity:1;transform:translateY(0);}
+}
 </style>
 
 </head>
@@ -101,7 +110,6 @@ border-radius:50%;
 <body>
 
 <script>
-/* generate stars */
 for(let i=0;i<120;i++){
 let star=document.createElement("div")
 star.className="star"
@@ -111,9 +119,8 @@ document.body.appendChild(star)
 }
 </script>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <div class="nav">
-
 <div class="logo">Profit Plug</div>
 
 <div>
@@ -127,133 +134,80 @@ document.body.appendChild(star)
 🛒
 <div id="cartCount" class="cart-count">0</div>
 </div>
-
 </div>
 
 <!-- HERO -->
-<div class="container text-center">
+<div class="container text-center fade-in">
 
 <h1 class="text-5xl font-bold mb-6">
-Learn How To Make Money  
-Reselling Designer Clothes
+Learn How To Make Money Reselling Designer Clothes
 </h1>
 
-<p class="text-xl mb-8 max-w-2xl mx-auto">
-Profit Plug teaches you how to buy trending designer items for cheap
-and flip them online for massive profits.
+<p class="text-xl mb-6">
+Buy low, sell high, and turn it into real cash.
 </p>
 
+<p style="color:lime;">✔ Instant Access ✔ Beginner Friendly</p>
+<p style="color:orange;">⚠️ Limited spots available</p>
+
 <button onclick="addToCart()">Start Making Money</button>
+
+<p id="timer" style="color:orange;margin-top:15px;"></p>
 
 </div>
 
 <!-- PROFITS -->
-<div id="profits" class="container">
+<div id="profits" class="container fade-in">
 
-<h2 class="text-3xl font-bold mb-10 text-center">
-Real Profit Examples
-</h2>
+<h2 class="text-3xl text-center mb-10">Profit Examples</h2>
 
 <div class="grid md:grid-cols-3 gap-6">
 
 <div class="card text-center" onclick="openModal('Chrome Hearts Hoodie',60)">
-<h3 class="font-bold mb-2">Chrome Hearts Hoodie</h3>
-<p>Buy: $60</p>
-<p>Sell: $320</p>
-<p class="text-sky-400 font-bold">Profit: $260</p>
+<h3>Chrome Hearts Hoodie</h3>
+<p>$60 → $320</p>
 </div>
 
 <div class="card text-center" onclick="openModal('BAPE Tee',40)">
-<h3 class="font-bold mb-2">BAPE Tee</h3>
-<p>Buy: $40</p>
-<p>Sell: $200</p>
-<p class="text-sky-400 font-bold">Profit: $160</p>
+<h3>BAPE Tee</h3>
+<p>$40 → $200</p>
 </div>
 
 <div class="card text-center" onclick="openModal('AirPods',50)">
-<h3 class="font-bold mb-2">AirPods</h3>
-<p>Buy: $50</p>
-<p>Sell: $180</p>
-<p class="text-sky-400 font-bold">Profit: $130</p>
+<h3>AirPods</h3>
+<p>$50 → $180</p>
 </div>
 
 </div>
-
 </div>
 
 <!-- MODAL -->
-<div id="productModal" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.7);
-justify-content:center;
-align-items:center;
-">
-
+<div id="productModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;">
 <div style="background:#111827;padding:30px;border-radius:15px;text-align:center;width:320px;">
+<h2 id="productName"></h2>
+<p id="productPrice"></p>
 
-<h2 id="productName" class="text-xl font-bold mb-4"></h2>
-<p id="productPrice" class="mb-4"></p>
-
-<input id="qty" type="number" value="1" min="1"
-style="width:60px;padding:5px;color:black;margin-bottom:15px;">
-
-<br>
-
-<button onclick="addProductToCart()">Add to Cart</button>
+<input id="qty" type="number" value="1" min="1" style="color:black">
 
 <br><br>
-
-<p id="addedMsg" style="color:lime; display:none;">Added ✔</p>
-
-<br>
-
-<button onclick="closeModal()" style="background:gray;">Close</button>
-
+<button onclick="addProductToCart()">Add to Cart</button>
+<br><br>
+<button onclick="closeModal()">Close</button>
 </div>
-
 </div>
 
 <!-- COURSE -->
-<div id="course" class="container text-center">
-
+<div id="course" class="container text-center fade-in">
 <div class="card max-w-xl mx-auto">
-
-<h2 class="text-3xl font-bold mb-4">
-Profit Plug Course
-</h2>
-
-<p class="mb-4">
-Complete step-by-step guide to flipping designer clothing
-for profit.
-</p>
-
-<p class="text-sky-400 text-2xl font-bold">
-$25
-</p>
-
+<h2 class="text-3xl mb-4">Profit Plug Course</h2>
+<p>$25</p>
 <br>
-
 <button onclick="addToCart()">Buy Course</button>
-
-<br><br>
-
-<a href="course.html">
-<button>Access Course</button>
-</a>
-
+</div>
 </div>
 
-</div>
-
-<!-- FOOTER -->
-<div class="text-center pb-10 text-gray-400">
-Profit Plug © 2026
-</div>
+<!-- POPUP -->
+<div id="popup" style="position:fixed;bottom:20px;left:20px;background:#111827;padding:15px;border-radius:10px;display:none;"></div>
 
 <script>
 
@@ -263,17 +217,13 @@ let selectedProduct = null
 function updateCartCount(){
 document.getElementById("cartCount").innerText = cart.length
 }
-
 updateCartCount()
 
-function goToCart(){
-window.location.href="cart.html"
-}
+function goToCart(){window.location.href="cart.html"}
 
 function addToCart(){
-cart.push({name:"Profit Plug Course",price:25,qty:1})
+cart.push({name:"Course",price:25,qty:1})
 localStorage.setItem("cart",JSON.stringify(cart))
-updateCartCount()
 window.location.href="cart.html"
 }
 
@@ -289,26 +239,31 @@ document.getElementById("productModal").style.display="none"
 }
 
 function addProductToCart(){
-
-let quantity = document.getElementById("qty").value
-
-cart.push({
-name:selectedProduct.name,
-price:selectedProduct.price,
-qty:Number(quantity)
-})
-
-localStorage.setItem("cart", JSON.stringify(cart))
-
+let qty=document.getElementById("qty").value
+cart.push({name:selectedProduct.name,price:selectedProduct.price,qty:Number(qty)})
+localStorage.setItem("cart",JSON.stringify(cart))
+closeModal()
 updateCartCount()
-
-document.getElementById("addedMsg").style.display="block"
-
-setTimeout(()=>{
-document.getElementById("addedMsg").style.display="none"
-},1500)
-
 }
+
+/* TIMER */
+let time=600
+setInterval(()=>{
+let m=Math.floor(time/60)
+let s=time%60
+document.getElementById("timer").innerText="⚠️ Price increases in "+m+":"+(s<10?"0":"")+s
+time--
+if(time<0) time=600
+},1000)
+
+/* FAKE SALES */
+let names=["Mike","Sarah","Jason","Alex"]
+setInterval(()=>{
+let popup=document.getElementById("popup")
+popup.innerText=names[Math.floor(Math.random()*names.length)]+" just bought the course"
+popup.style.display="block"
+setTimeout(()=>popup.style.display="none",3000)
+},7000)
 
 </script>
 
