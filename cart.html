@@ -2,17 +2,10 @@
 <html>
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Checkout - Profit Plug</title>
-
+<title>Cart - Profit Plug</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
-<script src="https://www.paypal.com/sdk/js?client-id=AYQd8kywzPLzuNCPox1-G2rsqQXTJiC9IMhZHytaxib8HstErg_jOBmSsc2amSaYpoM_5WllDsLB3oX4&currency=USD"></script>
-
 <style>
-
 body{
 background:linear-gradient(180deg,#0b3d91,#111827);
 color:white;
@@ -21,138 +14,155 @@ font-family:sans-serif;
 
 .card{
 background:rgba(255,255,255,0.05);
+padding:25px;
 border-radius:16px;
+}
+
+button{
+background:#38bdf8;
+color:black;
+padding:10px 20px;
+border-radius:20px;
+font-weight:bold;
+transition:.3s;
+}
+
+button:hover{
+background:#0ea5e9;
+}
+
+.remove-btn{
+background:red;
+color:white;
+padding:6px 12px;
+border-radius:10px;
+font-size:12px;
+}
+
+.checkout{
+background:rgba(255,255,255,0.08);
 padding:30px;
-box-shadow:0 0 20px rgba(0,0,0,0.4);
+border-radius:16px;
+text-align:center;
 }
 
 </style>
 
 </head>
 
-<body>
+<body class="p-6">
 
-<div class="max-w-5xl mx-auto p-6">
-
-<!-- HEADER -->
-
-<div class="flex justify-between items-center mb-10">
-
-<h1 class="text-3xl font-bold">
-Checkout
+<h1 class="text-4xl text-center mb-10 font-bold">
+Your Cart
 </h1>
 
-<a href="index.html" class="text-gray-300 hover:text-white">
-← Back
+<div class="max-w-4xl mx-auto">
+
+<div id="cartItems" class="space-y-4"></div>
+
+<div id="emptyMsg" class="text-center text-gray-400 mt-10 hidden">
+Your cart is empty
+</div>
+
+<!-- TOTAL -->
+<div class="card mt-10 text-center">
+
+<h2 class="text-2xl mb-4">Total</h2>
+
+<p id="totalPrice" class="text-3xl text-sky-400 font-bold">
+$0
+</p>
+
+</div>
+
+<!-- CHECKOUT -->
+<div class="checkout mt-10">
+
+<h2 class="text-2xl mb-4">Checkout</h2>
+
+<p class="mb-2">
+Send payment via Cash App:
+</p>
+
+<p class="text-green-400 text-xl font-bold mb-4">
+$BOZOZAIN
+</p>
+
+<p class="text-gray-300 text-sm mb-6">
+After sending, contact us to receive your course + vendor access.
+</p>
+
+<button onclick="copyCashApp()">
+Copy Cash App
+</button>
+
+<br><br>
+
+<a href="index.html">
+<button>
+Back to Home
+</button>
 </a>
 
 </div>
 
-
-<div class="grid md:grid-cols-2 gap-8">
-
-<!-- LEFT SIDE (ORDER DETAILS) -->
-
-<div class="card">
-
-<h2 class="text-xl font-bold mb-6">
-Order Summary
-</h2>
-
-<table id="cartTable" class="w-full mb-6 text-left"></table>
-
-<hr class="border-gray-600 mb-4">
-
-<h2 id="total" class="text-2xl font-bold"></h2>
-
 </div>
-
-
-<!-- RIGHT SIDE (PAYMENT) -->
-
-<div class="card text-center">
-
-<h2 class="text-xl font-bold mb-4">
-Secure Payment
-</h2>
-
-<p class="text-gray-300 mb-6">
-Pay safely using PayPal or Venmo
-</p>
-
-<div id="paypal-button-container"></div>
-
-<p class="text-gray-400 text-sm mt-6">
-✔ Instant course access after payment  
-<br>
-✔ Secure encrypted checkout
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-
 
 <script>
 
-let cart=JSON.parse(localStorage.getItem("cart"))||[]
+let cart = JSON.parse(localStorage.getItem("cart")) || []
 
-let table=document.getElementById("cartTable")
+function renderCart(){
 
-let total=0
+let container = document.getElementById("cartItems")
+let total = 0
 
-cart.forEach(item=>{
+container.innerHTML=""
 
-let row=document.createElement("tr")
+if(cart.length === 0){
+document.getElementById("emptyMsg").style.display="block"
+return
+}
 
-row.innerHTML=`
+cart.forEach((item,index)=>{
 
-<td class="py-2">${item.name}</td>
-<td>$${item.price}</td>
-<td>x${item.qty}</td>
-<td class="text-sky-400">$${item.price*item.qty}</td>
+let itemTotal = item.price * item.qty
+total += itemTotal
 
+container.innerHTML += `
+<div class="card flex justify-between items-center">
+
+<div>
+<h2 class="text-xl font-bold">${item.name}</h2>
+<p>$${item.price} x ${item.qty}</p>
+<p class="text-sky-400">Total: $${itemTotal}</p>
+</div>
+
+<button class="remove-btn" onclick="removeItem(${index})">
+Remove
+</button>
+
+</div>
 `
 
-table.appendChild(row)
-
-total+=item.price*item.qty
-
 })
 
-document.getElementById("total").innerText="Total: $"+total
-
-
-paypal.Buttons({
-
-createOrder:function(data,actions){
-
-return actions.order.create({
-purchase_units:[{
-amount:{value:total.toFixed(2)}
-}]
-})
-
-},
-
-onApprove:function(data,actions){
-
-return actions.order.capture().then(function(){
-
-localStorage.setItem("courseUnlocked","true")
-
-alert("Payment Successful! Course Unlocked.")
-
-window.location.href="course.html"
-
-})
+document.getElementById("totalPrice").innerText = "$" + total
 
 }
 
-}).render('#paypal-button-container')
+function removeItem(index){
+cart.splice(index,1)
+localStorage.setItem("cart", JSON.stringify(cart))
+renderCart()
+}
+
+function copyCashApp(){
+navigator.clipboard.writeText("$BOZOZAIN")
+alert("Cash App copied!")
+}
+
+renderCart()
 
 </script>
 
