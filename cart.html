@@ -5,29 +5,96 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Checkout</title>
+<title>Checkout - Profit Plug</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
 <script src="https://www.paypal.com/sdk/js?client-id=AYQd8kywzPLzuNCPox1-G2rsqQXTJiC9IMhZHytaxib8HstErg_jOBmSsc2amSaYpoM_5WllDsLB3oX4&currency=USD"></script>
 
+<style>
+
+body{
+background:linear-gradient(180deg,#0b3d91,#111827);
+color:white;
+font-family:sans-serif;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border-radius:16px;
+padding:30px;
+box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+</style>
+
 </head>
 
-<body class="bg-gray-900 text-white p-10">
+<body>
 
-<h1 class="text-3xl mb-6">
+<div class="max-w-5xl mx-auto p-6">
+
+<!-- HEADER -->
+
+<div class="flex justify-between items-center mb-10">
+
+<h1 class="text-3xl font-bold">
 Checkout
 </h1>
 
-<table id="cartTable" class="w-full mb-6"></table>
+<a href="index.html" class="text-gray-300 hover:text-white">
+← Back
+</a>
 
-<h2 id="total" class="text-xl mb-6"></h2>
+</div>
+
+
+<div class="grid md:grid-cols-2 gap-8">
+
+<!-- LEFT SIDE (ORDER DETAILS) -->
+
+<div class="card">
+
+<h2 class="text-xl font-bold mb-6">
+Order Summary
+</h2>
+
+<table id="cartTable" class="w-full mb-6 text-left"></table>
+
+<hr class="border-gray-600 mb-4">
+
+<h2 id="total" class="text-2xl font-bold"></h2>
+
+</div>
+
+
+<!-- RIGHT SIDE (PAYMENT) -->
+
+<div class="card text-center">
+
+<h2 class="text-xl font-bold mb-4">
+Secure Payment
+</h2>
+
+<p class="text-gray-300 mb-6">
+Pay safely using PayPal or Venmo
+</p>
 
 <div id="paypal-button-container"></div>
 
+<p class="text-gray-400 text-sm mt-6">
+✔ Instant course access after payment  
 <br>
+✔ Secure encrypted checkout
+</p>
 
-<a href="index.html">Back</a>
+</div>
+
+</div>
+
+</div>
+
+
 
 <script>
 
@@ -43,10 +110,10 @@ let row=document.createElement("tr")
 
 row.innerHTML=`
 
-<td>${item.name}</td>
+<td class="py-2">${item.name}</td>
 <td>$${item.price}</td>
-<td>${item.qty}</td>
-<td>$${item.price*item.qty}</td>
+<td>x${item.qty}</td>
+<td class="text-sky-400">$${item.price*item.qty}</td>
 
 `
 
@@ -58,18 +125,15 @@ total+=item.price*item.qty
 
 document.getElementById("total").innerText="Total: $"+total
 
+
 paypal.Buttons({
 
 createOrder:function(data,actions){
 
 return actions.order.create({
-
 purchase_units:[{
-
 amount:{value:total.toFixed(2)}
-
 }]
-
 })
 
 },
@@ -78,9 +142,9 @@ onApprove:function(data,actions){
 
 return actions.order.capture().then(function(){
 
-alert("Payment Successful! Course Unlocked.")
-
 localStorage.setItem("courseUnlocked","true")
+
+alert("Payment Successful! Course Unlocked.")
 
 window.location.href="course.html"
 
